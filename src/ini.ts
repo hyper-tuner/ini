@@ -1156,21 +1156,22 @@ class INI {
 }
 
 const versions = [
-  202012,
-  202103,
+  // '202012',
+  // '202103',
+  '202109-dev',
 ];
 
 versions.forEach((version) => {
   const result = new INI(
-    fs.readFileSync(path.join(__dirname, `/../../public/tunes/${version}.ini`), 'utf8'),
+    fs.readFileSync(path.join(__dirname, `/../test/data/ini/${version}.ini`), 'utf8'),
   ).parse();
 
-  fs.writeFileSync(path.join(__dirname, `/../../public/tunes/${version}.yml`), yaml.dump(result));
-  fs.writeFileSync(path.join(__dirname, `/../../public/tunes/${version}.json`), JSON.stringify(result));
+  fs.writeFileSync(path.join(__dirname, `/../test/data/yaml/${version}.yml`), yaml.dump(result));
+  fs.writeFileSync(path.join(__dirname, `/../test/data/json/${version}.json`), JSON.stringify(result));
 });
 
 // const result = new INI(
-//   fs.readFileSync(path.join(__dirname, `/../../public/tunes/${versions[1]}.ini`), 'utf8'),
+//   fs.readFileSync(path.join(__dirname, `/../test/data/tunes/${versions[1]}.ini`), 'utf8'),
 // ).parse();
 // console.dir(
 //   result.outputChannels,
