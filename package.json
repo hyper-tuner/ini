@@ -1,0 +1,39 @@
+{
+  "name": "@speedy-tuner/ini",
+  "description": "SpeedyTuner INI parser",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/speedy-tuner/ini"
+  },
+  "main": "dist/ini.js",
+  "types": "dist/ini.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "start": "tsc --watch",
+    "lint": "tsc && eslint --max-warnings=0 src/**/*.ts src/*.ts"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.3",
+    "@types/node": "^16.9.1",
+    "@types/parsimmon": "^1.10.6",
+    "@typescript-eslint/eslint-plugin": "^4.31.0",
+    "@typescript-eslint/parser": "^4.31.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.1",
+    "eslint-plugin-modules-newline": "^0.0.6",
+    "eslint-plugin-prettier": "^4.0.0",
+    "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "@speedy-tuner/types": "^0.1.1",
+    "js-yaml": "^4.1.0",
+    "parsimmon": "^1.18.0"
+  }
+}
