@@ -23,6 +23,8 @@ jobs:
   publish-gpr:
     needs: build
     runs-on: ubuntu-latest
+    env:
+      NPM_GITHUB_TOKEN: ${{ secrets.NPM_GITHUB_PAT }}
     permissions:
       contents: read
       packages: write
