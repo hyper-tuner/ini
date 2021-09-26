@@ -17,8 +17,7 @@
     "prepublishOnly": "npm run build",
     "start": "tsc --watch",
     "lint": "tsc && eslint --max-warnings=0 src/**/*.ts src/*.ts",
-    "ini:start": "npm run build && node dist/ini.js",
-    "ini:watch": "npx onchange src/ini.ts -- npm run ini:start"
+    "test": "npm run build && node test/test.js"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.3",
