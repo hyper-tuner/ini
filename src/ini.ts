@@ -1,15 +1,10 @@
-import fs from 'fs';
-import path from 'path';
-import yaml from 'js-yaml';
 import * as P from 'parsimmon';
 import {
   Config as ConfigType,
   Constant,
 } from '@speedy-tuner/types';
 
-console.log('------- start --------');
-
-class INI {
+export class INI {
   space: P.Parser<any>;
 
   expression: P.Parser<any>;
@@ -1155,26 +1150,3 @@ class INI {
   };
 }
 
-const versions = [
-  202012,
-  202103,
-];
-
-versions.forEach((version) => {
-  const result = new INI(
-    fs.readFileSync(path.join(__dirname, `/../../public/tunes/${version}.ini`), 'utf8'),
-  ).parse();
-
-  fs.writeFileSync(path.join(__dirname, `/../../public/tunes/${version}.yml`), yaml.dump(result));
-  fs.writeFileSync(path.join(__dirname, `/../../public/tunes/${version}.json`), JSON.stringify(result));
-});
-
-// const result = new INI(
-//   fs.readFileSync(path.join(__dirname, `/../../public/tunes/${versions[1]}.ini`), 'utf8'),
-// ).parse();
-// console.dir(
-//   result.outputChannels,
-//   { depth: null, compact: false },
-// );
-
-console.log('------- end --------');
