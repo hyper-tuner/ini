@@ -10,6 +10,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NPM_GITHUB_TOKEN: ${{ secrets.NPM_GITHUB_PAT }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
