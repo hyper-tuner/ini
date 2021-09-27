@@ -7393,7 +7393,7 @@ constants:
           shape:
             columns: 16
             rows: 0
-          units: '{ bitStringValue(algorithmUnits ,  algorithm) }'
+          units: '{ bitStringValue(algorithmUnits , algorithm) }'
           scale: 2
           transform: 0
           min: 0
@@ -7435,7 +7435,7 @@ constants:
           shape:
             columns: 16
             rows: 0
-          units: '{ bitStringValue(algorithmUnits ,  ignAlgorithm) }'
+          units: '{ bitStringValue(algorithmUnits , ignAlgorithm) }'
           scale: 2
           transform: 0
           min: 0
@@ -8517,7 +8517,7 @@ constants:
           shape:
             columns: 16
             rows: 0
-          units: '{ bitStringValue(algorithmUnits ,  algorithm) }'
+          units: '{ bitStringValue(algorithmUnits , algorithm) }'
           scale: 2
           transform: 0
           min: 0
@@ -9701,7 +9701,7 @@ constants:
           shape:
             columns: 8
             rows: 0
-          units: '{ bitStringValue(algorithmUnits ,  vvtLoadSource) }'
+          units: '{ bitStringValue(algorithmUnits , vvtLoadSource) }'
           scale: 1
           transform: 0
           min: 0
@@ -9740,7 +9740,7 @@ constants:
           shape:
             columns: 8
             rows: 0
-          units: '{ bitStringValue(algorithmUnits ,  algorithm) }'
+          units: '{ bitStringValue(algorithmUnits , algorithm) }'
           scale: 2
           transform: 0
           min: 0
@@ -9782,7 +9782,7 @@ constants:
           shape:
             columns: 6
             rows: 0
-          units: '{ bitStringValue(algorithmUnits ,  algorithm) }'
+          units: '{ bitStringValue(algorithmUnits , algorithm) }'
           scale: 2
           transform: 0
           min: 0
@@ -9821,7 +9821,7 @@ constants:
           shape:
             columns: 6
             rows: 0
-          units: '{ bitStringValue(algorithmUnits ,  algorithm) }'
+          units: '{ bitStringValue(algorithmUnits , algorithm) }'
           scale: 2
           transform: 0
           min: 0
@@ -9860,7 +9860,7 @@ constants:
           shape:
             columns: 6
             rows: 0
-          units: '{ bitStringValue(algorithmUnits ,  algorithm) }'
+          units: '{ bitStringValue(algorithmUnits , algorithm) }'
           scale: 2
           transform: 0
           min: 0
@@ -9899,7 +9899,7 @@ constants:
           shape:
             columns: 6
             rows: 0
-          units: '{ bitStringValue(algorithmUnits ,  algorithm) }'
+          units: '{ bitStringValue(algorithmUnits , algorithm) }'
           scale: 2
           transform: 0
           min: 0
@@ -9938,7 +9938,7 @@ constants:
           shape:
             columns: 6
             rows: 0
-          units: '{ bitStringValue(algorithmUnits ,  algorithm) }'
+          units: '{ bitStringValue(algorithmUnits , algorithm) }'
           scale: 2
           transform: 0
           min: 0
@@ -9977,7 +9977,7 @@ constants:
           shape:
             columns: 6
             rows: 0
-          units: '{ bitStringValue(algorithmUnits ,  algorithm) }'
+          units: '{ bitStringValue(algorithmUnits , algorithm) }'
           scale: 2
           transform: 0
           min: 0
@@ -10016,7 +10016,7 @@ constants:
           shape:
             columns: 6
             rows: 0
-          units: '{ bitStringValue(algorithmUnits ,  algorithm) }'
+          units: '{ bitStringValue(algorithmUnits , algorithm) }'
           scale: 2
           transform: 0
           min: 0
@@ -10055,7 +10055,7 @@ constants:
           shape:
             columns: 6
             rows: 0
-          units: '{ bitStringValue(algorithmUnits ,  algorithm) }'
+          units: '{ bitStringValue(algorithmUnits , algorithm) }'
           scale: 2
           transform: 0
           min: 0
@@ -53323,7 +53323,7 @@ constants:
           shape:
             columns: 8
             rows: 0
-          units: '{ bitStringValue(algorithmUnits ,  algorithm) }'
+          units: '{ bitStringValue(algorithmUnits , algorithm) }'
           scale: 2
           transform: 0
           min: 0
@@ -54186,7 +54186,7 @@ constants:
           type: scalar
           size: U16
           offset: 123
-          units: '{ bitStringValue(fuel2SwitchUnits,  fuel2SwitchVariable) }'
+          units: '{ bitStringValue(fuel2SwitchUnits, fuel2SwitchVariable) }'
           scale: 1
           transform: 0
           min: 0
@@ -55041,7 +55041,7 @@ constants:
           type: scalar
           size: U16
           offset: 187
-          units: '{ bitStringValue(fuel2SwitchUnits,  spark2SwitchVariable) }'
+          units: '{ bitStringValue(fuel2SwitchUnits, spark2SwitchVariable) }'
           scale: 1
           transform: 0
           min: 0
@@ -55188,7 +55188,7 @@ constants:
           shape:
             columns: 16
             rows: 0
-          units: '{ bitStringValue(algorithmUnits ,  fuel2Algorithm) }'
+          units: '{ bitStringValue(algorithmUnits , fuel2Algorithm) }'
           scale: 2
           transform: 0
           min: 0
@@ -58449,7 +58449,7 @@ constants:
           shape:
             columns: 16
             rows: 0
-          units: '{ bitStringValue(algorithmUnits ,  ignAlgorithm) }'
+          units: '{ bitStringValue(algorithmUnits , ignAlgorithm) }'
           scale: 2
           transform: 0
           min: 0
@@ -58641,7 +58641,7 @@ menus:
       iacStep_curve:
         title: Idle - Stepper Motor
         page: 7
-        condition: '{ iacAlgorithm == 4  }'
+        condition: '{ iacAlgorithm == 4 }'
       iacStepCrank_curve:
         title: Idle - Stepper Motor Cranking
         page: 7
@@ -61857,224 +61857,224 @@ dialogs:
       - name: _fieldText_
         title: Source
       - name: Auxin0pina
-        title: 'Local Analog Source 0                 Pin No:'
+        title: 'Local Analog Source 0 Pin No:'
         condition: >-
           {(caninput_sel0a == 2 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel0b == 2
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin0pinb
-        title: 'Local Digital Source 0                  Pin No:'
+        title: 'Local Digital Source 0 Pin No:'
         condition: >-
           {(caninput_sel0a == 3 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel0b == 3
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin1pina
-        title: 'Local Analog Source 1                 Pin No:'
+        title: 'Local Analog Source 1 Pin No:'
         condition: >-
           {(caninput_sel1a == 2 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel1b == 2
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin1pinb
-        title: 'Local Digital Source 1                  Pin No:'
+        title: 'Local Digital Source 1 Pin No:'
         condition: >-
           {(caninput_sel1a == 3 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel1b == 3
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin2pina
-        title: 'Local Analog Source 2                 Pin No:'
+        title: 'Local Analog Source 2 Pin No:'
         condition: >-
           {(caninput_sel2a == 2 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel2b == 2
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin2pinb
-        title: 'Local Digital Source 2                  Pin No:'
+        title: 'Local Digital Source 2 Pin No:'
         condition: >-
           {(caninput_sel2a == 3 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel2b == 3
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin3pina
-        title: 'Local Analog Source 3                 Pin No:'
+        title: 'Local Analog Source 3 Pin No:'
         condition: >-
           {(caninput_sel3a == 2 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel3b == 2
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin3pinb
-        title: 'Local Digital Source 3                  Pin No:'
+        title: 'Local Digital Source 3 Pin No:'
         condition: >-
           {(caninput_sel3a == 3 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel3b == 3
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin4pina
-        title: 'Local Analog Source 4                 Pin No:'
+        title: 'Local Analog Source 4 Pin No:'
         condition: >-
           {(caninput_sel4a == 2 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel4b == 2
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin4pinb
-        title: 'Local Digital Source 4                  Pin No:'
+        title: 'Local Digital Source 4 Pin No:'
         condition: >-
           {(caninput_sel4a == 3 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel4b == 3
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin5pina
-        title: 'Local Analog Source 5                 Pin No:'
+        title: 'Local Analog Source 5 Pin No:'
         condition: >-
           {(caninput_sel5a == 2 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel5b == 2
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin5pinb
-        title: 'Local Digital Source 5                  Pin No:'
+        title: 'Local Digital Source 5 Pin No:'
         condition: >-
           {(caninput_sel5a == 3 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel5b == 3
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin6pina
-        title: 'Local Analog Source 6                 Pin No:'
+        title: 'Local Analog Source 6 Pin No:'
         condition: >-
           {(caninput_sel6a == 2 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel6b == 2
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin6pinb
-        title: 'Local Digital Source 6                  Pin No:'
+        title: 'Local Digital Source 6 Pin No:'
         condition: >-
           {(caninput_sel6a == 3 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel6b == 3
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin7pina
-        title: 'Local Analog Source 7                 Pin No:'
+        title: 'Local Analog Source 7 Pin No:'
         condition: >-
           {(caninput_sel7a == 2 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel7b == 2
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin7pinb
-        title: 'Local Digital Source 7                  Pin No:'
+        title: 'Local Digital Source 7 Pin No:'
         condition: >-
           {(caninput_sel7a == 3 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel7b == 3
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin8pina
-        title: 'Local Analog Source 8                 Pin No:'
+        title: 'Local Analog Source 8 Pin No:'
         condition: >-
           {(caninput_sel8a == 2 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel8b == 2
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin8pinb
-        title: 'Local Digital Source 8                  Pin No:'
+        title: 'Local Digital Source 8 Pin No:'
         condition: >-
           {(caninput_sel8a == 3 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel8b == 3
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin9pina
-        title: 'Local Analog Source 9                 Pin No:'
+        title: 'Local Analog Source 9 Pin No:'
         condition: >-
           {(caninput_sel9a == 2 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel9b == 2
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin9pinb
-        title: 'Local Digital Source 9                  Pin No:'
+        title: 'Local Digital Source 9 Pin No:'
         condition: >-
           {(caninput_sel9a == 3 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel9b == 3
           && (enable_secondarySerial || (enable_intcan && intcan_available == 1
           )))}
       - name: Auxin10pina
-        title: 'Local Analog Source 10                 Pin No:'
+        title: 'Local Analog Source 10 Pin No:'
         condition: >-
           {(caninput_sel10a == 2 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel10b ==
           2 && (enable_secondarySerial || (enable_intcan && intcan_available ==
           1 )))}
       - name: Auxin10pinb
-        title: 'Local Digital Source 10                  Pin No:'
+        title: 'Local Digital Source 10 Pin No:'
         condition: >-
           {(caninput_sel10a == 3 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel10b ==
           3 && (enable_secondarySerial || (enable_intcan && intcan_available ==
           1 )))}
       - name: Auxin11pina
-        title: 'Local Analog Source 11                 Pin No:'
+        title: 'Local Analog Source 11 Pin No:'
         condition: >-
           {(caninput_sel11a == 2 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel11b ==
           2 && (enable_secondarySerial || (enable_intcan && intcan_available ==
           1 )))}
       - name: Auxin11pinb
-        title: 'Local Digital Source 11                  Pin No:'
+        title: 'Local Digital Source 11 Pin No:'
         condition: >-
           {(caninput_sel11a == 3 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel11b ==
           3 && (enable_secondarySerial || (enable_intcan && intcan_available ==
           1 )))}
       - name: Auxin12pina
-        title: 'Local Analog Source 12                 Pin No:'
+        title: 'Local Analog Source 12 Pin No:'
         condition: >-
           {(caninput_sel12a == 2 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel12b ==
           2 && (enable_secondarySerial || (enable_intcan && intcan_available ==
           1 )))}
       - name: Auxin12pinb
-        title: 'Local Digital Source 12                  Pin No:'
+        title: 'Local Digital Source 12 Pin No:'
         condition: >-
           {(caninput_sel12a == 3 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel12b ==
           3 && (enable_secondarySerial || (enable_intcan && intcan_available ==
           1 )))}
       - name: Auxin13pina
-        title: 'Local Analog Source 13                 Pin No:'
+        title: 'Local Analog Source 13 Pin No:'
         condition: >-
           {(caninput_sel13a == 2 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel13b ==
           2 && (enable_secondarySerial || (enable_intcan && intcan_available ==
           1 )))}
       - name: Auxin13pinb
-        title: 'Local Digital Source 13                  Pin No:'
+        title: 'Local Digital Source 13 Pin No:'
         condition: >-
           {(caninput_sel13a == 3 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel13b ==
           3 && (enable_secondarySerial || (enable_intcan && intcan_available ==
           1 )))}
       - name: Auxin14pina
-        title: 'Local Analog Source 14                 Pin No:'
+        title: 'Local Analog Source 14 Pin No:'
         condition: >-
           {(caninput_sel14a == 2 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel14b ==
           2 && (enable_secondarySerial || (enable_intcan && intcan_available ==
           1 )))}
       - name: Auxin14pinb
-        title: 'Local Digital Source 14                  Pin No:'
+        title: 'Local Digital Source 14 Pin No:'
         condition: >-
           {(caninput_sel14a == 3 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel14b ==
           3 && (enable_secondarySerial || (enable_intcan && intcan_available ==
           1 )))}
       - name: Auxin15pina
-        title: 'Local Analog Source 15                 Pin No:'
+        title: 'Local Analog Source 15 Pin No:'
         condition: >-
           {(caninput_sel15a == 2 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel15b ==
           2 && (enable_secondarySerial || (enable_intcan && intcan_available ==
           1 )))}
       - name: Auxin15pinb
-        title: 'Local Digital Source 15                  Pin No:'
+        title: 'Local Digital Source 15 Pin No:'
         condition: >-
           {(caninput_sel15a == 3 && (!enable_secondarySerial && (!enable_intcan
           || (enable_intcan && intcan_available == 0)))) || (caninput_sel15b ==
@@ -64649,7 +64649,7 @@ outputChannels:
     type: scalar
     size: U08
     offset: 37
-    units: '{ bitStringValue( idleUnits , iacAlgorithm  ) }'
+    units: '{ bitStringValue( idleUnits , iacAlgorithm ) }'
     scale: >-
       { (iacAlgorithm == 2 || iacAlgorithm == 3 || iacAlgorithm == 6 ||
       iacMaxSteps <= 255) ? 1.000 : 2.000 }
@@ -64966,14 +64966,14 @@ outputChannels:
     type: scalar
     size: S16
     offset: 85
-    units: '{ bitStringValue( algorithmUnits , algorithm  ) }'
+    units: '{ bitStringValue( algorithmUnits , algorithm ) }'
     scale: 1
     transform: 0
   ignLoad:
     type: scalar
     size: S16
     offset: 87
-    units: '{ bitStringValue( algorithmUnits , ignAlgorithm  ) }'
+    units: '{ bitStringValue( algorithmUnits , ignAlgorithm ) }'
     scale: 1
     transform: 0
   dwell:
@@ -65208,25 +65208,25 @@ outputChannels:
     scale: 1
     transform: 0
   coolant:
-    value: '{ (coolantRaw - 40) * 1.8 + 32                  }'
+    value: '{ (coolantRaw - 40) * 1.8 + 32 }'
   iat:
-    value: '{ (iatRaw - 40) * 1.8 + 32                      }'
+    value: '{ (iatRaw - 40) * 1.8 + 32 }'
   fuelTemp:
-    value: '{ (fuelTempRaw - 40) * 1.8 + 32                 }'
+    value: '{ (fuelTempRaw - 40) * 1.8 + 32 }'
   time:
-    value: '{ timeNow                                       }'
+    value: '{ timeNow }'
   seconds:
-    value: '{ secl                                          }'
+    value: '{ secl }'
   throttle:
     value: '{ tps }'
   revolutionTime:
-    value: '{ rpm ? ( 60000.0 / rpm) : 0                    }'
+    value: '{ rpm ? ( 60000.0 / rpm) : 0 }'
   strokeMultipler:
-    value: '{ twoStroke == 1 ? 1 : 2                        }'
+    value: '{ twoStroke == 1 ? 1 : 2 }'
   cycleTime:
-    value: '{ revolutionTime * strokeMultipler              }'
+    value: '{ revolutionTime * strokeMultipler }'
   pulseLimit:
-    value: '{ cycleTime / nSquirts                          }'
+    value: '{ cycleTime / nSquirts }'
   nFuelChannels:
     value: '{ arrayValue( array.boardFuelOutputs, pinLayout ) }'
   nIgnChannels:
@@ -65236,9 +65236,9 @@ outputChannels:
   sequentialIgnitionAvailable:
     value: '{ nCylinders <= nIgnChannels }'
   dutyCycle:
-    value: '{ rpm ? ( 100.0*pulseWidth/pulseLimit ) : 0     }'
+    value: '{ rpm ? ( 100.0*pulseWidth/pulseLimit ) : 0 }'
   stgDutyCycle:
-    value: '{ rpm && stagingEnabled ? ( 100.0*pulseWidth3/pulseLimit ) : 0      }'
+    value: '{ rpm && stagingEnabled ? ( 100.0*pulseWidth3/pulseLimit ) : 0 }'
   boostCutOut:
     value: '{ boostCutFuel || boostCutSpark }'
   lambda:
