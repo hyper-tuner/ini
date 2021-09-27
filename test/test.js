@@ -47,9 +47,9 @@ VERSIONS.forEach((version) => {
   fs.writeFileSync(pathFor(`tmp/${version}.yml`), yamlContent);
   fs.writeFileSync(pathFor(`tmp/${version}.json`), jsonContent);
 
-  assert.equal(yamlNew, yamlOld);
-  assert.equal(jsonNew, jsonOld);
+  assert.equal(yamlNew, yamlOld, `Generated file ${version}.yaml looks different than expected`);
+  assert.equal(jsonNew, jsonOld, `Generated file ${version}.json looks different than expected`);
 
-  fs.unlinkSync(pathFor(`tmp/${version}.yml`));
-  fs.unlinkSync(pathFor(`tmp/${version}.json`));
+  // fs.unlinkSync(pathFor(`tmp/${version}.yml`));
+  // fs.unlinkSync(pathFor(`tmp/${version}.json`));
 });

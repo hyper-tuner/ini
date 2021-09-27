@@ -1135,9 +1135,14 @@ export class INI {
       .tryParse(line);
   }
 
-  private static numberOrExpression = (val: string | undefined | null) => INI.isNumber(val || '0') ? Number(val || 0) : INI.sanitize(`${val}`);
+  private static numberOrExpression = (val: string | undefined | null) =>
+    INI.isNumber(val || '0') ? Number(val || 0) : INI.sanitize(`${val}`);
 
-  private static sanitize = (val: any) => val === undefined ? '' : `${val}`.replace(/"/g, '').trim();
+  private static sanitize = (val: any) =>
+    val === undefined ? '' : `${val}`
+      .replace(/"/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
 
   private static isNumber = (val: any) => !Number.isNaN(Number(val));
 
