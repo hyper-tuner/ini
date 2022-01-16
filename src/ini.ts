@@ -3,8 +3,9 @@ import {
   Config as ConfigType,
   Constant,
 } from '@speedy-tuner/types';
+import { ParserInterface } from './parserInterface';
 
-export class INI {
+export class INI implements ParserInterface {
   space: P.Parser<any>;
 
   expression: P.Parser<any>;
@@ -49,7 +50,7 @@ export class INI {
 
   result: ConfigType;
 
-  constructor(buffer: string) {
+  constructor(buffer: ArrayBuffer) {
     this.space = P.optWhitespace;
     this.expression = P.regexp(/{.+?}/);
     this.numbers = P.regexp(/[0-9.-]*/);
@@ -65,7 +66,7 @@ export class INI {
     this.inQuotes = this.notQuote.trim(this.space).wrap(...this.quotes);
     this.values = P.regexp(/[^,;]*/).trim(this.space).sepBy(this.comma);
 
-    this.lines = buffer.toString().split('\n');
+    this.lines = (new TextDecoder()).decode(buffer).split('\n');
 
     this.currentPage = undefined;
     this.currentDialog = undefined;
@@ -99,8 +100,13 @@ export class INI {
     };
   }
 
-  parse() {
+  parse(): this {
     this.parseSections();
+
+    return this;
+  }
+
+  getResults(): ConfigType {
     return this.result;
   }
 
