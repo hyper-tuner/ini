@@ -52,7 +52,7 @@ export class INI implements ParserInterface {
 
   constructor(buffer: ArrayBuffer) {
     this.space = P.optWhitespace;
-    this.expression = P.regexp(/{.+?}/);
+    this.expression = P.regexp(/{.+?}|(([a-z])([A-z\d]+))/);
     this.numbers = P.regexp(/[0-9.-]*/);
     this.name = P.regexp(/[0-9a-z_]*/i);
     this.equal = P.string('=');
@@ -1061,10 +1061,7 @@ export class INI implements ParserInterface {
     };
 
     const scalarShortRest: any = [
-      ['units', P.alt(
-        this.expression,
-        this.inQuotes,
-      )],
+      ['units', P.alt(this.expression, this.inQuotes)],
       ...this.delimiter,
       ['scale', P.alt(this.expression, this.numbers)],
       ...this.delimiter,
@@ -1078,7 +1075,7 @@ export class INI implements ParserInterface {
       ...this.delimiter,
       ['max', P.alt(this.expression, this.numbers)],
       ...this.delimiter,
-      ['digits', P.digits],
+      ['digits', P.alt(this.expression, P.digits)],
       P.all,
     ];
 
