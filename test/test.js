@@ -7,9 +7,10 @@ const crypto = require('crypto');
 const { INI } = require('../dist');
 
 const VERSIONS = [
-  '202012',
+  '202202',
+  '202108',
   '202103',
-  '202109-dev',
+  '202012',
 ];
 
 const pathFor = (file) => path.join(__dirname, `/../test/data/${file}`);
@@ -28,28 +29,30 @@ const hashReference = (version) => {
 };
 
 VERSIONS.forEach((version) => {
-  const result = new INI(
-    fs.readFileSync(pathFor(`ini/${version}.ini`), 'utf8'),
-  ).parse();
+  fs.readFile(pathFor(`ini/${version}.ini`), 'utf8', (_err, data) => {
+    const result = new INI((new TextEncoder()).encode(data))
+      .parse()
+      .getResults();
 
-  const yamlContent = yaml.dump(result);
-  const jsonContent = JSON.stringify(result);
+    const yamlContent = yaml.dump(result);
+    const jsonContent = JSON.stringify(result);
 
-  const md5YamlNew = crypto.createHash('md5');
-  const md5JsonNew = crypto.createHash('md5');
+    const md5YamlNew = crypto.createHash('md5');
+    const md5JsonNew = crypto.createHash('md5');
 
-  const yamlNew = md5YamlNew.update(yamlContent).digest('hex');
-  const jsonNew = md5JsonNew.update(jsonContent).digest('hex');
+    const yamlNew = md5YamlNew.update(yamlContent).digest('hex');
+    const jsonNew = md5JsonNew.update(jsonContent).digest('hex');
 
-  const { yamlOld, jsonOld } = hashReference(version);
+    const { yamlOld, jsonOld } = hashReference(version);
 
-  // write temp files to disk so we can debug more easily
-  fs.writeFileSync(pathFor(`tmp/${version}.yml`), yamlContent);
-  fs.writeFileSync(pathFor(`tmp/${version}.json`), jsonContent);
+    // write temp files to disk so we can debug more easily
+    fs.writeFileSync(pathFor(`tmp/${version}.yml`), yamlContent);
+    fs.writeFileSync(pathFor(`tmp/${version}.json`), jsonContent);
 
-  assert.equal(yamlNew, yamlOld, `Generated file ${version}.yaml looks different than expected`);
-  assert.equal(jsonNew, jsonOld, `Generated file ${version}.json looks different than expected`);
+    assert.equal(yamlNew, yamlOld, `Generated file ${version}.yaml looks different than expected`);
+    assert.equal(jsonNew, jsonOld, `Generated file ${version}.json looks different than expected`);
 
-  // fs.unlinkSync(pathFor(`tmp/${version}.yml`));
-  // fs.unlinkSync(pathFor(`tmp/${version}.json`));
+    // fs.unlinkSync(pathFor(`tmp/${version}.yml`));
+    // fs.unlinkSync(pathFor(`tmp/${version}.json`));
+  });
 });

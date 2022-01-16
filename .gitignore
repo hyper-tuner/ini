@@ -17,6 +17,6 @@ yarn-error.log*
 
 .eslintcache
 
-# temp test data
-/test/data/tmp/*
-!/test/data/tmp/.keep
+# # temp test data
+# /test/data/tmp/*
+# !/test/data/tmp/.keep

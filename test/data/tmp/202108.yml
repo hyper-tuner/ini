@@ -1,5 +1,5 @@
 megaTune:
-  signature: speeduino 202109-dev
+  signature: speeduino 202108
   MTversion: 2.25
   queryCommand: Q
   versionInfo: S
@@ -528,10 +528,9 @@ defines:
     - idle C.L. target
     - MAP DOT
     - VVT1 Angle
-    - INVALID
     - VVT1 Target
-  fullStatus_def_4:
     - VVT1 duty
+  fullStatus_def_4:
     - flexBoostCorrection
     - INVALID
     - baro correction
@@ -545,7 +544,6 @@ defines:
     - WMI duty
     - WMI empty
     - VVT2 angle
-    - INVALID
     - VVT2 target
     - VVT2 duty
     - outputs status
@@ -554,37 +552,6 @@ defines:
     - Advance 1
     - Advance 2
     - SD status
-    - INVALID
-    - EMAP
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-  fullStatus_def_5:
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
     - INVALID
     - INVALID
     - INVALID
@@ -789,7 +756,6 @@ defines:
     - idle C.L. target
     - MAP DOT
     - VVT1 Angle
-    - INVALID
     - VVT1 Target
     - VVT1 duty
     - flexBoostCorrection
@@ -805,7 +771,6 @@ defines:
     - WMI duty
     - WMI empty
     - VVT2 angle
-    - INVALID
     - VVT2 target
     - VVT2 duty
     - outputs status
@@ -815,7 +780,6 @@ defines:
     - Advance 2
     - SD status
     - INVALID
-    - EMAP
     - INVALID
     - INVALID
     - INVALID
@@ -825,35 +789,7 @@ defines:
     - INVALID
     - INVALID
     - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
-    - INVALID
+    - null
     - INVALID
     - INVALID
     - INVALID
@@ -992,8 +928,6 @@ defines:
     - '19'
   trigger_FordST170:
     - '20'
-  trigger_DRZ400:
-    - '21'
   PIN_OUT10inv:
     - INVALID
     - INVALID
@@ -7843,7 +7777,7 @@ constants:
           min: 0
           max: 16320
           digits: 0
-        unused2_95:
+        unused2-95:
           type: array
           size: U08
           offset: 126
@@ -8042,7 +7976,7 @@ constants:
             - DSM 420a
             - Weber-Marelli
             - Ford ST170
-            - DRZ400
+            - INVALID
             - INVALID
             - INVALID
             - INVALID
@@ -8987,7 +8921,7 @@ constants:
           values:
             - Advance
             - Retard
-        unusedBits4_123:
+        unusedBits4-123:
           type: bits
           size: U08
           offset: 123
@@ -9015,25 +8949,18 @@ constants:
           min: 0
           max: 240
           digits: 0
-        vvtMinClt:
-          type: scalar
+        unused4-124:
+          type: array
           size: U08
           offset: 126
-          units: C
+          shape:
+            columns: 2
+            rows: 0
+          units: '%'
           scale: 1
-          transform: -40
-          min: -40
-          max: 215
-          digits: 0
-        vvtDelay:
-          type: scalar
-          size: U08
-          offset: 127
-          units: S
-          scale: 5
           transform: 0
           min: 0
-          max: 1275
+          max: 255
           digits: 0
     - number: 5
       size: 0
@@ -10194,7 +10121,7 @@ constants:
           scale: 2
           transform: 0
           min: 0
-          max: '{boostTableLimit}'
+          max: boostTableLimit
           digits: 0
         rpmBinsBoost:
           type: array
@@ -57412,7 +57339,6 @@ constants:
             - idle C.L. target
             - MAP DOT
             - VVT1 Angle
-            - INVALID
             - VVT1 Target
             - VVT1 duty
             - flexBoostCorrection
@@ -57428,7 +57354,6 @@ constants:
             - WMI duty
             - WMI empty
             - VVT2 angle
-            - INVALID
             - VVT2 target
             - VVT2 duty
             - outputs status
@@ -57438,7 +57363,6 @@ constants:
             - Advance 2
             - SD status
             - INVALID
-            - EMAP
             - INVALID
             - INVALID
             - INVALID
@@ -57448,35 +57372,7 @@ constants:
             - INVALID
             - INVALID
             - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
+            - null
             - INVALID
             - INVALID
             - INVALID
@@ -57675,7 +57571,6 @@ constants:
             - idle C.L. target
             - MAP DOT
             - VVT1 Angle
-            - INVALID
             - VVT1 Target
             - VVT1 duty
             - flexBoostCorrection
@@ -57691,7 +57586,6 @@ constants:
             - WMI duty
             - WMI empty
             - VVT2 angle
-            - INVALID
             - VVT2 target
             - VVT2 duty
             - outputs status
@@ -57701,7 +57595,6 @@ constants:
             - Advance 2
             - SD status
             - INVALID
-            - EMAP
             - INVALID
             - INVALID
             - INVALID
@@ -57711,35 +57604,7 @@ constants:
             - INVALID
             - INVALID
             - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
+            - null
             - INVALID
             - INVALID
             - INVALID
@@ -57938,7 +57803,6 @@ constants:
             - idle C.L. target
             - MAP DOT
             - VVT1 Angle
-            - INVALID
             - VVT1 Target
             - VVT1 duty
             - flexBoostCorrection
@@ -57954,7 +57818,6 @@ constants:
             - WMI duty
             - WMI empty
             - VVT2 angle
-            - INVALID
             - VVT2 target
             - VVT2 duty
             - outputs status
@@ -57964,7 +57827,6 @@ constants:
             - Advance 2
             - SD status
             - INVALID
-            - EMAP
             - INVALID
             - INVALID
             - INVALID
@@ -57974,35 +57836,7 @@ constants:
             - INVALID
             - INVALID
             - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
+            - null
             - INVALID
             - INVALID
             - INVALID
@@ -58201,7 +58035,6 @@ constants:
             - idle C.L. target
             - MAP DOT
             - VVT1 Angle
-            - INVALID
             - VVT1 Target
             - VVT1 duty
             - flexBoostCorrection
@@ -58217,7 +58050,6 @@ constants:
             - WMI duty
             - WMI empty
             - VVT2 angle
-            - INVALID
             - VVT2 target
             - VVT2 duty
             - outputs status
@@ -58227,7 +58059,6 @@ constants:
             - Advance 2
             - SD status
             - INVALID
-            - EMAP
             - INVALID
             - INVALID
             - INVALID
@@ -58237,35 +58068,7 @@ constants:
             - INVALID
             - INVALID
             - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
+            - null
             - INVALID
             - INVALID
             - INVALID
@@ -58464,7 +58267,6 @@ constants:
             - idle C.L. target
             - MAP DOT
             - VVT1 Angle
-            - INVALID
             - VVT1 Target
             - VVT1 duty
             - flexBoostCorrection
@@ -58480,7 +58282,6 @@ constants:
             - WMI duty
             - WMI empty
             - VVT2 angle
-            - INVALID
             - VVT2 target
             - VVT2 duty
             - outputs status
@@ -58490,7 +58291,6 @@ constants:
             - Advance 2
             - SD status
             - INVALID
-            - EMAP
             - INVALID
             - INVALID
             - INVALID
@@ -58500,35 +58300,7 @@ constants:
             - INVALID
             - INVALID
             - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
+            - null
             - INVALID
             - INVALID
             - INVALID
@@ -58727,7 +58499,6 @@ constants:
             - idle C.L. target
             - MAP DOT
             - VVT1 Angle
-            - INVALID
             - VVT1 Target
             - VVT1 duty
             - flexBoostCorrection
@@ -58743,7 +58514,6 @@ constants:
             - WMI duty
             - WMI empty
             - VVT2 angle
-            - INVALID
             - VVT2 target
             - VVT2 duty
             - outputs status
@@ -58753,7 +58523,6 @@ constants:
             - Advance 2
             - SD status
             - INVALID
-            - EMAP
             - INVALID
             - INVALID
             - INVALID
@@ -58763,35 +58532,7 @@ constants:
             - INVALID
             - INVALID
             - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
+            - null
             - INVALID
             - INVALID
             - INVALID
@@ -58990,7 +58731,6 @@ constants:
             - idle C.L. target
             - MAP DOT
             - VVT1 Angle
-            - INVALID
             - VVT1 Target
             - VVT1 duty
             - flexBoostCorrection
@@ -59006,7 +58746,6 @@ constants:
             - WMI duty
             - WMI empty
             - VVT2 angle
-            - INVALID
             - VVT2 target
             - VVT2 duty
             - outputs status
@@ -59016,7 +58755,6 @@ constants:
             - Advance 2
             - SD status
             - INVALID
-            - EMAP
             - INVALID
             - INVALID
             - INVALID
@@ -59026,35 +58764,7 @@ constants:
             - INVALID
             - INVALID
             - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
+            - null
             - INVALID
             - INVALID
             - INVALID
@@ -59253,7 +58963,6 @@ constants:
             - idle C.L. target
             - MAP DOT
             - VVT1 Angle
-            - INVALID
             - VVT1 Target
             - VVT1 duty
             - flexBoostCorrection
@@ -59269,7 +58978,6 @@ constants:
             - WMI duty
             - WMI empty
             - VVT2 angle
-            - INVALID
             - VVT2 target
             - VVT2 duty
             - outputs status
@@ -59279,7 +58987,6 @@ constants:
             - Advance 2
             - SD status
             - INVALID
-            - EMAP
             - INVALID
             - INVALID
             - INVALID
@@ -59289,35 +58996,7 @@ constants:
             - INVALID
             - INVALID
             - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
+            - null
             - INVALID
             - INVALID
             - INVALID
@@ -59529,7 +59208,6 @@ constants:
             - idle C.L. target
             - MAP DOT
             - VVT1 Angle
-            - INVALID
             - VVT1 Target
             - VVT1 duty
             - flexBoostCorrection
@@ -59545,7 +59223,6 @@ constants:
             - WMI duty
             - WMI empty
             - VVT2 angle
-            - INVALID
             - VVT2 target
             - VVT2 duty
             - outputs status
@@ -59555,7 +59232,6 @@ constants:
             - Advance 2
             - SD status
             - INVALID
-            - EMAP
             - INVALID
             - INVALID
             - INVALID
@@ -59565,35 +59241,7 @@ constants:
             - INVALID
             - INVALID
             - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
+            - null
             - INVALID
             - INVALID
             - INVALID
@@ -59792,7 +59440,6 @@ constants:
             - idle C.L. target
             - MAP DOT
             - VVT1 Angle
-            - INVALID
             - VVT1 Target
             - VVT1 duty
             - flexBoostCorrection
@@ -59808,7 +59455,6 @@ constants:
             - WMI duty
             - WMI empty
             - VVT2 angle
-            - INVALID
             - VVT2 target
             - VVT2 duty
             - outputs status
@@ -59818,7 +59464,6 @@ constants:
             - Advance 2
             - SD status
             - INVALID
-            - EMAP
             - INVALID
             - INVALID
             - INVALID
@@ -59828,35 +59473,7 @@ constants:
             - INVALID
             - INVALID
             - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
+            - null
             - INVALID
             - INVALID
             - INVALID
@@ -60055,7 +59672,6 @@ constants:
             - idle C.L. target
             - MAP DOT
             - VVT1 Angle
-            - INVALID
             - VVT1 Target
             - VVT1 duty
             - flexBoostCorrection
@@ -60071,7 +59687,6 @@ constants:
             - WMI duty
             - WMI empty
             - VVT2 angle
-            - INVALID
             - VVT2 target
             - VVT2 duty
             - outputs status
@@ -60081,7 +59696,6 @@ constants:
             - Advance 2
             - SD status
             - INVALID
-            - EMAP
             - INVALID
             - INVALID
             - INVALID
@@ -60091,35 +59705,7 @@ constants:
             - INVALID
             - INVALID
             - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
+            - null
             - INVALID
             - INVALID
             - INVALID
@@ -60318,7 +59904,6 @@ constants:
             - idle C.L. target
             - MAP DOT
             - VVT1 Angle
-            - INVALID
             - VVT1 Target
             - VVT1 duty
             - flexBoostCorrection
@@ -60334,7 +59919,6 @@ constants:
             - WMI duty
             - WMI empty
             - VVT2 angle
-            - INVALID
             - VVT2 target
             - VVT2 duty
             - outputs status
@@ -60344,7 +59928,6 @@ constants:
             - Advance 2
             - SD status
             - INVALID
-            - EMAP
             - INVALID
             - INVALID
             - INVALID
@@ -60354,35 +59937,7 @@ constants:
             - INVALID
             - INVALID
             - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
+            - null
             - INVALID
             - INVALID
             - INVALID
@@ -60581,7 +60136,6 @@ constants:
             - idle C.L. target
             - MAP DOT
             - VVT1 Angle
-            - INVALID
             - VVT1 Target
             - VVT1 duty
             - flexBoostCorrection
@@ -60597,7 +60151,6 @@ constants:
             - WMI duty
             - WMI empty
             - VVT2 angle
-            - INVALID
             - VVT2 target
             - VVT2 duty
             - outputs status
@@ -60607,7 +60160,6 @@ constants:
             - Advance 2
             - SD status
             - INVALID
-            - EMAP
             - INVALID
             - INVALID
             - INVALID
@@ -60617,35 +60169,7 @@ constants:
             - INVALID
             - INVALID
             - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
+            - null
             - INVALID
             - INVALID
             - INVALID
@@ -60844,7 +60368,6 @@ constants:
             - idle C.L. target
             - MAP DOT
             - VVT1 Angle
-            - INVALID
             - VVT1 Target
             - VVT1 duty
             - flexBoostCorrection
@@ -60860,7 +60383,6 @@ constants:
             - WMI duty
             - WMI empty
             - VVT2 angle
-            - INVALID
             - VVT2 target
             - VVT2 duty
             - outputs status
@@ -60870,7 +60392,6 @@ constants:
             - Advance 2
             - SD status
             - INVALID
-            - EMAP
             - INVALID
             - INVALID
             - INVALID
@@ -60880,35 +60401,7 @@ constants:
             - INVALID
             - INVALID
             - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
+            - null
             - INVALID
             - INVALID
             - INVALID
@@ -61107,7 +60600,6 @@ constants:
             - idle C.L. target
             - MAP DOT
             - VVT1 Angle
-            - INVALID
             - VVT1 Target
             - VVT1 duty
             - flexBoostCorrection
@@ -61123,7 +60615,6 @@ constants:
             - WMI duty
             - WMI empty
             - VVT2 angle
-            - INVALID
             - VVT2 target
             - VVT2 duty
             - outputs status
@@ -61133,7 +60624,6 @@ constants:
             - Advance 2
             - SD status
             - INVALID
-            - EMAP
             - INVALID
             - INVALID
             - INVALID
@@ -61143,35 +60633,7 @@ constants:
             - INVALID
             - INVALID
             - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
+            - null
             - INVALID
             - INVALID
             - INVALID
@@ -61370,7 +60832,6 @@ constants:
             - idle C.L. target
             - MAP DOT
             - VVT1 Angle
-            - INVALID
             - VVT1 Target
             - VVT1 duty
             - flexBoostCorrection
@@ -61386,7 +60847,6 @@ constants:
             - WMI duty
             - WMI empty
             - VVT2 angle
-            - INVALID
             - VVT2 target
             - VVT2 duty
             - outputs status
@@ -61396,7 +60856,6 @@ constants:
             - Advance 2
             - SD status
             - INVALID
-            - EMAP
             - INVALID
             - INVALID
             - INVALID
@@ -61406,35 +60865,7 @@ constants:
             - INVALID
             - INVALID
             - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
-            - INVALID
+            - null
             - INVALID
             - INVALID
             - INVALID
@@ -62236,7 +61667,7 @@ menus:
         page: 0
         condition: ''
       boostLoad:
-        title: Boost Targets/Duty
+        title: Boost Targets/Load
         page: 8
         condition: '{ boostEnabled }'
       vvtSettings:
@@ -62244,11 +61675,11 @@ menus:
         page: 0
         condition: ''
       vvtTbl:
-        title: VVT Target/Duty
+        title: VVT duty cycle
         page: 8
         condition: '{ vvtEnabled }'
       vvt2Tbl:
-        title: VVT2 Target/Duty
+        title: VVT2 duty cycle
         page: 8
         condition: '{ vvtEnabled && vvt2Enabled }'
       wmiSettings:
@@ -62357,7 +61788,6 @@ dialogs:
         title: MAP Sample method
       - name: mapSwitchPoint
         title: MAP Sample switch point
-        condition: '{ mapSample >= 1 }'
   engine_constants_west:
     title: ''
     panels:
@@ -63294,7 +62724,7 @@ dialogs:
         title: Primary base teeth
         condition: >-
           { TrigPattern == 0 || TrigPattern == 2 || TrigPattern == 11 ||
-          TrigPattern == 18 || TrigPattern == 19  || TrigPattern == 21 }
+          TrigPattern == 18 || TrigPattern == 19 }
       - name: TrigSpeed
         title: Primary trigger speed
         condition: '{ TrigPattern == 0 }'
@@ -63325,8 +62755,7 @@ dialogs:
         condition: >-
           { (TrigPattern == 0 && TrigSpeed == 0 && trigPatternSec != 2) ||
           TrigPattern == 2 || TrigPattern == 9 || TrigPattern == 12 ||
-          TrigPattern == 18 || TrigPattern == 19 || TrigPattern == 20 ||
-          TrigPattern == 21 }
+          TrigPattern == 18 || TrigPattern == 19 || TrigPattern == 20 }
       - name: trigPatternSec
         title: Missing Tooth Secondary type
         condition: '{ (TrigPattern == 0&& TrigSpeed == 0) }'
@@ -63341,7 +62770,7 @@ dialogs:
         condition: >-
           { TrigPattern == 2 || TrigPattern == 4 || TrigPattern == 7 ||
           TrigPattern == 12 || TrigPattern == 9 || TrigPattern == 13 ||
-          TrigPattern == 18 || TrigPattern == 19  || TrigPattern == 21 }
+          TrigPattern == 18 || TrigPattern == 19 }
     help: https://wiki.speeduino.com/en/decoders
   lockSparkSettings:
     title: Locked timing
@@ -63877,7 +63306,6 @@ dialogs:
         fields: []
         panels: {}
       boostByGear:
-        condition: '{ boostEnabled && boostType == 1 && vssMode > 1 }'
         fields: []
         panels: {}
     fields:
@@ -63930,7 +63358,6 @@ dialogs:
         condition: '{ vvt2Enabled && vvtMode == 2 }'
       - name: vvt2CL0DutyAng
         title: VVT2 Cam angle @ 0% duty
-        condition: '{ vvt2Enabled && vvtMode == 2 }'
       - name: TrigEdgeThrd
         title: VVT2 Trigger edge
         condition: '{ vvt2Enabled && vvtMode == 2 }'
@@ -63981,12 +63408,6 @@ dialogs:
     fields:
       - name: vvtEnabled
         title: VVT Control Enabled
-      - name: vvtMinClt
-        title: VVT Minimum CLT
-        condition: '{ vvtEnabled }'
-      - name: vvtDelay
-        title: VVT Delay
-        condition: '{ vvtEnabled }'
       - name: vvtMode
         title: VVT Mode
         condition: '{ vvtEnabled }'
@@ -65428,14 +64849,12 @@ dialogs:
         title: Enable Internal Canbus
       - name: true_address
         title: True Canbus Address
-        condition: '{enable_secondarySerial||enable_intcan}'
       - name: _fieldText_
         title: >-
           NOTE! Realtime Data Base Address MUST be at least 0x16 GREATER than
           the True Address as they are reserved for future expansion
       - name: realtime_base_address
         title: Realtime Data Base Can Address
-        condition: '{enable_secondarySerial||enable_intcan}'
       - name: obd_address
         title: Speeduino OBD address
     help: http://speeduino.com/wiki/index.php/Secondary_Serial_IO_interface
@@ -65449,14 +64868,12 @@ dialogs:
         title: Enable Internal Canbus
       - name: true_address
         title: True Canbus Address
-        condition: '{enable_secondarySerial||enable_intcan}'
       - name: _fieldText_
         title: >-
           NOTE! Realtime Data Base Address MUST be at least 0x16 GREATER than
           the True Address as they are reserved for future expansion
       - name: realtime_base_address
         title: Realtime Data Base Can Address
-        condition: '{enable_secondarySerial||enable_intcan}'
       - name: obd_address
         title: Speeduino OBD address
     help: http://speeduino.com/wiki/index.php/Serial3_IO_interface
@@ -65811,180 +65228,68 @@ dialogs:
         title: Aux Input Channel Enable
       - name: caninput_sel0a
         title: AUX Input 0
-        condition: >-
-          { (!enable_secondarySerial && (!enable_intcan || (enable_intcan &&
-          intcan_available == 0))) }
       - name: caninput_sel0b
         title: AUX Input 0
-        condition: >-
-          { (enable_secondarySerial && enable_intcan) ||
-          (!enable_secondarySerial && (enable_intcan && intcan_available)) ||
-          (enable_secondarySerial && !enable_intcan) }
       - name: caninput_sel1a
         title: AUX Input 1
-        condition: >-
-          { (!enable_secondarySerial && (!enable_intcan || (enable_intcan &&
-          intcan_available == 0))) }
       - name: caninput_sel1b
         title: AUX Input 1
-        condition: >-
-          { (enable_secondarySerial && enable_intcan) ||
-          (!enable_secondarySerial && (enable_intcan && intcan_available)) ||
-          (enable_secondarySerial && !enable_intcan) }
       - name: caninput_sel2a
         title: AUX Input 2
-        condition: >-
-          { (!enable_secondarySerial && (!enable_intcan || (enable_intcan &&
-          intcan_available == 0))) }
       - name: caninput_sel2b
         title: AUX Input 2
-        condition: >-
-          { (enable_secondarySerial && enable_intcan) ||
-          (!enable_secondarySerial && (enable_intcan && intcan_available)) ||
-          (enable_secondarySerial && !enable_intcan) }
       - name: caninput_sel3a
         title: AUX Input 3
-        condition: >-
-          { (!enable_secondarySerial && (!enable_intcan || (enable_intcan &&
-          intcan_available == 0))) }
       - name: caninput_sel3b
         title: AUX Input 3
-        condition: >-
-          { (enable_secondarySerial && enable_intcan) ||
-          (!enable_secondarySerial && (enable_intcan && intcan_available)) ||
-          (enable_secondarySerial && !enable_intcan) }
       - name: caninput_sel4a
         title: AUX Input 4
-        condition: >-
-          { (!enable_secondarySerial && (!enable_intcan || (enable_intcan &&
-          intcan_available == 0))) }
       - name: caninput_sel4b
         title: AUX Input 4
-        condition: >-
-          { (enable_secondarySerial && enable_intcan) ||
-          (!enable_secondarySerial && (enable_intcan && intcan_available)) ||
-          (enable_secondarySerial && !enable_intcan) }
       - name: caninput_sel5a
         title: AUX Input 5
-        condition: >-
-          { (!enable_secondarySerial && (!enable_intcan || (enable_intcan &&
-          intcan_available == 0))) }
       - name: caninput_sel5b
         title: AUX Input 5
-        condition: >-
-          { (enable_secondarySerial && enable_intcan) ||
-          (!enable_secondarySerial && (enable_intcan && intcan_available)) ||
-          (enable_secondarySerial && !enable_intcan) }
       - name: caninput_sel6a
         title: AUX Input 6
-        condition: >-
-          { (!enable_secondarySerial && (!enable_intcan || (enable_intcan &&
-          intcan_available == 0))) }
       - name: caninput_sel6b
         title: AUX Input 6
-        condition: >-
-          { (enable_secondarySerial && enable_intcan) ||
-          (!enable_secondarySerial && (enable_intcan && intcan_available)) ||
-          (enable_secondarySerial && !enable_intcan) }
       - name: caninput_sel7a
         title: AUX Input 7
-        condition: >-
-          { (!enable_secondarySerial && (!enable_intcan || (enable_intcan &&
-          intcan_available == 0))) }
       - name: caninput_sel7b
         title: AUX Input 7
-        condition: >-
-          { (enable_secondarySerial && enable_intcan) ||
-          (!enable_secondarySerial && (enable_intcan && intcan_available)) ||
-          (enable_secondarySerial && !enable_intcan) }
       - name: caninput_sel8a
         title: AUX Input 8
-        condition: >-
-          { (!enable_secondarySerial && (!enable_intcan || (enable_intcan &&
-          intcan_available == 0))) }
       - name: caninput_sel8b
         title: AUX Input 8
-        condition: >-
-          { (enable_secondarySerial && enable_intcan) ||
-          (!enable_secondarySerial && (enable_intcan && intcan_available)) ||
-          (enable_secondarySerial && !enable_intcan) }
       - name: caninput_sel9a
         title: AUX Input 9
-        condition: >-
-          { (!enable_secondarySerial && (!enable_intcan || (enable_intcan &&
-          intcan_available == 0))) }
       - name: caninput_sel9b
         title: AUX Input 9
-        condition: >-
-          { (enable_secondarySerial && enable_intcan) ||
-          (!enable_secondarySerial && (enable_intcan && intcan_available)) ||
-          (enable_secondarySerial && !enable_intcan) }
       - name: caninput_sel10a
         title: AUX Input 10
-        condition: >-
-          { (!enable_secondarySerial && (!enable_intcan || (enable_intcan &&
-          intcan_available == 0))) }
       - name: caninput_sel10b
         title: AUX Input 10
-        condition: >-
-          { (enable_secondarySerial && enable_intcan) ||
-          (!enable_secondarySerial && (enable_intcan && intcan_available)) ||
-          (enable_secondarySerial && !enable_intcan) }
       - name: caninput_sel11a
         title: AUX Input 11
-        condition: >-
-          { (!enable_secondarySerial && (!enable_intcan || (enable_intcan &&
-          intcan_available == 0))) }
       - name: caninput_sel11b
         title: AUX Input 11
-        condition: >-
-          { (enable_secondarySerial && enable_intcan) ||
-          (!enable_secondarySerial && (enable_intcan && intcan_available)) ||
-          (enable_secondarySerial && !enable_intcan) }
       - name: caninput_sel12a
         title: AUX Input 12
-        condition: >-
-          { (!enable_secondarySerial && (!enable_intcan || (enable_intcan &&
-          intcan_available == 0))) }
       - name: caninput_sel12b
         title: AUX Input 12
-        condition: >-
-          { (enable_secondarySerial && enable_intcan) ||
-          (!enable_secondarySerial && (enable_intcan && intcan_available)) ||
-          (enable_secondarySerial && !enable_intcan) }
       - name: caninput_sel13a
         title: AUX Input 13
-        condition: >-
-          { (!enable_secondarySerial && (!enable_intcan || (enable_intcan &&
-          intcan_available == 0))) }
       - name: caninput_sel13b
         title: AUX Input 13
-        condition: >-
-          { (enable_secondarySerial && enable_intcan) ||
-          (!enable_secondarySerial && (enable_intcan && intcan_available)) ||
-          (enable_secondarySerial && !enable_intcan) }
       - name: caninput_sel14a
         title: AUX Input 14
-        condition: >-
-          { (!enable_secondarySerial && (!enable_intcan || (enable_intcan &&
-          intcan_available == 0))) }
       - name: caninput_sel14b
         title: AUX Input 14
-        condition: >-
-          { (enable_secondarySerial && enable_intcan) ||
-          (!enable_secondarySerial && (enable_intcan && intcan_available)) ||
-          (enable_secondarySerial && !enable_intcan) }
       - name: caninput_sel15a
         title: AUX Input 15
-        condition: >-
-          { (!enable_secondarySerial && (!enable_intcan || (enable_intcan &&
-          intcan_available == 0))) }
       - name: caninput_sel15b
         title: AUX Input 15
-        condition: >-
-          { (enable_secondarySerial && enable_intcan) ||
-          (!enable_secondarySerial && (enable_intcan && intcan_available)) ||
-          (enable_secondarySerial && !enable_intcan) }
   Auxin_south:
     title: Auxillary Input Configuration
     layout: xAxis
@@ -67431,7 +66736,7 @@ tables:
   boostTbl:
     map: boostMap
     title: Boost Duty / Target
-    page: 7
+    page: 8
     xBins:
       - rpmBinsBoost
       - rpm
@@ -67449,7 +66754,7 @@ tables:
   vvtTbl:
     map: vvtMap
     title: VVT control Table
-    page: 7
+    page: 8
     xBins:
       - rpmBinsVVT
       - rpm
@@ -67469,7 +66774,7 @@ tables:
   vvt2Tbl:
     map: vvt2Map
     title: VVT2 control Table
-    page: 12
+    page: 8
     xBins:
       - rpmBinsVVT2
       - rpm
@@ -67489,7 +66794,7 @@ tables:
   wmiTbl:
     map: wmiMapMap
     title: WMI control Table
-    page: 12
+    page: 8
     xBins:
       - rpmBinsWMI
       - rpm
@@ -67509,7 +66814,7 @@ tables:
   stagingTbl:
     map: stagingMap
     title: Fuel Staging Table
-    page: 7
+    page: 10
     xBins:
       - rpmBinsStaging
       - rpm
@@ -67527,7 +66832,7 @@ tables:
   fuelTrimTable1Tbl:
     map: fuelTrimTable1Map
     title: Fuel trim Table 1
-    page: 8
+    page: 9
     xBins:
       - fuelTrim1rpmBins
       - rpm
@@ -67549,7 +66854,7 @@ tables:
   fuelTrimTable2Tbl:
     map: fuelTrimTable2Map
     title: Fuel trim Table 2
-    page: 8
+    page: 9
     xBins:
       - fuelTrim2rpmBins
       - rpm
@@ -67571,7 +66876,7 @@ tables:
   fuelTrimTable3Tbl:
     map: fuelTrimTable3Map
     title: Fuel trim Table 3
-    page: 8
+    page: 9
     xBins:
       - fuelTrim3rpmBins
       - rpm
@@ -67593,7 +66898,7 @@ tables:
   fuelTrimTable4Tbl:
     map: fuelTrimTable4Map
     title: Fuel trim Table 4
-    page: 8
+    page: 9
     xBins:
       - fuelTrim4rpmBins
       - rpm
@@ -67615,7 +66920,7 @@ tables:
   fuelTrimTable5Tbl:
     map: fuelTrimTable5Map
     title: Fuel trim Table 5
-    page: 8
+    page: 9
     xBins:
       - fuelTrim5rpmBins
       - rpm
@@ -67637,7 +66942,7 @@ tables:
   fuelTrimTable6Tbl:
     map: fuelTrimTable6Map
     title: Fuel trim Table 6
-    page: 8
+    page: 9
     xBins:
       - fuelTrim6rpmBins
       - rpm
@@ -67659,7 +66964,7 @@ tables:
   fuelTrimTable7Tbl:
     map: fuelTrimTable7Map
     title: Fuel trim Table 7
-    page: 8
+    page: 9
     xBins:
       - fuelTrim7rpmBins
       - rpm
@@ -67681,7 +66986,7 @@ tables:
   fuelTrimTable8Tbl:
     map: fuelTrimTable8Map
     title: Fuel trim Table 8
-    page: 8
+    page: 9
     xBins:
       - fuelTrim8rpmBins
       - rpm
@@ -67703,7 +67008,7 @@ tables:
   dwell_map:
     map: dwell_tblMap
     title: Dwell map
-    page: 12
+    page: 4
     xBins:
       - rpmBinsDwell
       - rpm
@@ -69317,18 +68622,6 @@ datalog:
     type: int
     format: '%d'
     condition: '{ useEMAP }'
-  fuelLoad:
-    name: fuelLoad
-    label: FuelLoad
-    type: float
-    format: '%.1f'
-    condition: ''
-  ignLoad:
-    name: ignLoad
-    label: IgnitionLoad
-    type: float
-    format: '%.1f'
-    condition: ''
 help:
   nCylinders: Cylinder count
   alternate: >-
@@ -69889,10 +69182,6 @@ help:
   ANGLEFILTER_VVT: >-
     Can be used to smooth out cam angle readings if needed. Only supported on
     specific decoders that have cam angle reading capability
-  vvtMinClt: Minimum coolant temp to activate VVT
-  vvtDelay: >-
-    Time to wait after reaching minimum coolant temp (additional time for oil
-    warmup)
   stagedInjSizePri: >-
     Size of the primary injectors. The sum of the Pri and Sec injectors values
     MUST match the value used in the req_fuel calculation

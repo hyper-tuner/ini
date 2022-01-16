@@ -3,8 +3,9 @@ import {
   Config as ConfigType,
   Constant,
 } from '@speedy-tuner/types';
+import { ParserInterface } from './parserInterface';
 
-export class INI {
+export class INI implements ParserInterface {
   space: P.Parser<any>;
 
   expression: P.Parser<any>;
@@ -49,11 +50,11 @@ export class INI {
 
   result: ConfigType;
 
-  constructor(buffer: string) {
+  constructor(buffer: ArrayBuffer) {
     this.space = P.optWhitespace;
-    this.expression = P.regexp(/{.+?}/);
+    this.expression = P.regexp(/{.+?}|(([a-z])([A-z\d]+))/);
     this.numbers = P.regexp(/[0-9.-]*/);
-    this.name = P.regexp(/[0-9a-z_]*/i);
+    this.name = P.regexp(/[0-9a-z_\\-]*/i);
     this.equal = P.string('=');
     this.quote = P.string('"');
     this.quotes = [this.quote, this.quote];
@@ -65,7 +66,7 @@ export class INI {
     this.inQuotes = this.notQuote.trim(this.space).wrap(...this.quotes);
     this.values = P.regexp(/[^,;]*/).trim(this.space).sepBy(this.comma);
 
-    this.lines = buffer.toString().split('\n');
+    this.lines = (new TextDecoder()).decode(buffer).split('\n');
 
     this.currentPage = undefined;
     this.currentDialog = undefined;
@@ -99,8 +100,13 @@ export class INI {
     };
   }
 
-  parse() {
+  parse(): this {
     this.parseSections();
+
+    return this;
+  }
+
+  getResults(): ConfigType {
     return this.result;
   }
 
@@ -1055,10 +1061,7 @@ export class INI {
     };
 
     const scalarShortRest: any = [
-      ['units', P.alt(
-        this.expression,
-        this.inQuotes,
-      )],
+      ['units', P.alt(this.expression, this.inQuotes)],
       ...this.delimiter,
       ['scale', P.alt(this.expression, this.numbers)],
       ...this.delimiter,
@@ -1072,7 +1075,7 @@ export class INI {
       ...this.delimiter,
       ['max', P.alt(this.expression, this.numbers)],
       ...this.delimiter,
-      ['digits', P.digits],
+      ['digits', P.alt(this.expression, P.digits)],
       P.all,
     ];
 
