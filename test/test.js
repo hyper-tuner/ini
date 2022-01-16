@@ -7,10 +7,10 @@ const crypto = require('crypto');
 const { INI } = require('../dist');
 
 const VERSIONS = [
-  '202012',
-  '202103',
-  '202109-dev',
   '202202',
+  '202108',
+  '202103',
+  '202012',
 ];
 
 const pathFor = (file) => path.join(__dirname, `/../test/data/${file}`);
