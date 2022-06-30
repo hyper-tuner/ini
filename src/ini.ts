@@ -2,7 +2,7 @@ import * as P from 'parsimmon';
 import {
   Config as ConfigType,
   Constant,
-} from '@speedy-tuner/types';
+} from '@hyper-tuner/types';
 import { ParserInterface } from './parserInterface';
 
 export class INI implements ParserInterface {
