@@ -26,7 +26,7 @@
     "@types/parsimmon": "^1.10.6",
     "eslint-plugin-modules-newline": "^0.0.6",
     "eslint-plugin-prettier": "^4.0.0",
-    "typescript": "^4.8.2"
+    "typescript": "^4.8.3"
   },
   "dependencies": {
     "@hyper-tuner/types": "^0.3.0",
