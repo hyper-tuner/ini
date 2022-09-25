@@ -7,6 +7,7 @@ const crypto = require('crypto');
 const { INI } = require('../dist');
 
 const VERSIONS = [
+  '202207',
   '202202',
   '202108',
   '202103',
