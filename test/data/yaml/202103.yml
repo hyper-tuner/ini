@@ -58460,42 +58460,52 @@ menus:
     title: Settings
     subMenus:
       engine_constants:
+        type: subMenu
         title: Engine Constants
         page: 0
         condition: ''
       injChars:
+        type: subMenu
         title: Injector Characteristics
         page: 0
         condition: ''
       triggerSettings:
+        type: subMenu
         title: Trigger Setup
         page: 0
         condition: ''
       airdensity_curve:
+        type: subMenu
         title: IAT Density
         page: 0
         condition: ''
       baroFuel_curve:
+        type: subMenu
         title: Barometric Correction
         page: 0
         condition: ''
       reset_control:
+        type: subMenu
         title: Reset Control
         page: 0
         condition: ''
       std_separator:
+        type: subMenu
         title: ''
         page: 0
         condition: ''
       gaugeLimits:
+        type: subMenu
         title: Gauge Limits
         page: 0
         condition: ''
       io_summary:
+        type: subMenu
         title: I/O Summary
         page: 0
         condition: ''
       prgm_out_config:
+        type: subMenu
         title: Programmable outputs
         page: 0
         condition: ''
@@ -58503,62 +58513,77 @@ menus:
     title: Tuning
     subMenus:
       std_realtime:
+        type: subMenu
         title: Realtime Display
         page: 0
         condition: ''
       accelEnrichments:
+        type: subMenu
         title: Acceleration Enrichment
         page: 0
         condition: ''
       egoControl:
+        type: subMenu
         title: AFR/O2
         page: 3
         condition: ''
       RevLimiterS:
+        type: subMenu
         title: Engine Protection
         page: 2
         condition: ''
       flexFueling:
+        type: subMenu
         title: Flex Fuel
         page: 2
         condition: ''
       veTableDialog:
+        type: subMenu
         title: VE Table
         page: 0
         condition: ''
       sparkTbl:
+        type: subMenu
         title: Spark Table
         page: 2
         condition: ''
       afrTable1Tbl:
+        type: subMenu
         title: AFR Table
         page: 5
         condition: ''
       std_separator:
+        type: subMenu
         title: ''
         page: 0
         condition: ''
       fuelTable2Dialog:
+        type: subMenu
         title: Second fuel Table
         page: 11
         condition: ''
       sparkTable2Dialog:
+        type: subMenu
         title: Second spark Table
         page: 14
         condition: ''
       inj_trimad:
+        type: subMenu
         title: Sequential fuel trim (1-4)
         page: 9
         condition: ''
       inj_trimad_B:
+        type: subMenu
         title: Sequential fuel trim (5-8)
         page: 9
         condition: '{ nFuelChannels >= 5 }'
       stagingTableDialog:
+        type: subMenu
         title: Staged Injection
         page: 10
         condition: '{ nCylinders <= 4 || injType == 1 }'
       fuelTemp_curve:
+        type: subMenu
         title: Fuel Temp Correction
         page: 0
         condition: '{ flexEnabled }'
@@ -58566,34 +58591,42 @@ menus:
     title: Spark
     subMenus:
       sparkSettings:
+        type: subMenu
         title: Spark Settings
         page: 0
         condition: ''
       sparkTbl:
+        type: subMenu
         title: Spark Table
         page: 2
         condition: ''
       dwellSettings:
+        type: subMenu
         title: Dwell settings
         page: 0
         condition: ''
       dwell_correction_curve:
+        type: subMenu
         title: Dwell Compensation
         page: 0
         condition: ''
       dwell_map:
+        type: subMenu
         title: Dwell Map
         page: 0
         condition: '{ useDwellMap }'
       iat_retard_curve:
+        type: subMenu
         title: IAT Retard
         page: 0
         condition: ''
       clt_advance_curve:
+        type: subMenu
         title: Cold Advance
         page: 0
         condition: ''
       rotary_ignition:
+        type: subMenu
         title: Rotary Ignition
         page: 0
         condition: '{ sparkMode == 4 }'
@@ -58601,58 +58634,71 @@ menus:
     title: Startup/Idle
     subMenus:
       crankPW:
+        type: subMenu
         title: Cranking Settings
         page: 0
         condition: ''
       primePW:
+        type: subMenu
         title: Priming Pulsewidth
         page: 0
         condition: ''
       warmup:
+        type: subMenu
         title: Warmup Enrichment
         page: 0
         condition: ''
       ASE:
+        type: subMenu
         title: Afterstart Enrichment (ASE)
         page: 0
         condition: ''
       std_separator:
+        type: subMenu
         title: ''
         page: 0
         condition: ''
       idleSettings:
+        type: subMenu
         title: Idle Control
         page: 0
         condition: ''
       iacClosedLoop_curve:
+        type: subMenu
         title: Idle - RPM targets
         page: 7
         condition: >-
           { iacAlgorithm == 3 || iacAlgorithm == 5 || iacAlgorithm == 6 ||
           idleAdvEnabled >= 1 }
       iacPwm_curve:
+        type: subMenu
         title: Idle - PWM Duty Cycle
         page: 7
         condition: '{ iacAlgorithm == 2 || iacAlgorithm == 6}'
       iacPwmCrank_curve:
+        type: subMenu
         title: Idle - PWM Cranking Duty Cycle
         page: 7
         condition: '{ iacAlgorithm == 2 || iacAlgorithm == 3 || iacAlgorithm == 6}'
       iacStep_curve:
+        type: subMenu
         title: Idle - Stepper Motor
         page: 7
         condition: '{ iacAlgorithm == 4 }'
       iacStepCrank_curve:
+        type: subMenu
         title: Idle - Stepper Motor Cranking
         page: 7
         condition: '{ iacAlgorithm == 4 || iacAlgorithm == 5 }'
       idleUpSettings:
+        type: subMenu
         title: Idle Up Settings
         page: 0
         condition: >-
           { iacAlgorithm == 2 || iacAlgorithm == 3 || iacAlgorithm == 4 ||
           iacAlgorithm == 5 || iacAlgorithm == 6 }
       idleAdvanceSettings:
+        type: subMenu
         title: Idle Advance Settings
         page: 0
         condition: ''
@@ -58660,74 +58706,92 @@ menus:
     title: Accessories
     subMenus:
       fanSettings:
+        type: subMenu
         title: Thermo Fan
         page: 0
         condition: ''
       LaunchControl:
+        type: subMenu
         title: Launch Control / Flat Shift
         page: 0
         condition: ''
       fuelpump:
+        type: subMenu
         title: Fuel Pump
         page: 0
         condition: ''
       NitrousControl:
+        type: subMenu
         title: Nitrous
         page: 0
         condition: ''
       vssSettings:
+        type: subMenu
         title: VSS and Gear detection
         page: 0
         condition: ''
       std_separator:
+        type: subMenu
         title: ''
         page: 0
         condition: ''
       boostSettings:
+        type: subMenu
         title: Boost Control
         page: 0
         condition: ''
       boostLoad:
+        type: subMenu
         title: Boost Targets/Load
         page: 8
         condition: '{ boostEnabled }'
       vvtSettings:
+        type: subMenu
         title: VVT Control
         page: 0
         condition: ''
       vvtTbl:
+        type: subMenu
         title: VVT duty cycle
         page: 8
         condition: '{ vvtEnabled }'
       wmiSettings:
+        type: subMenu
         title: WMI Control
         page: 0
         condition: '{ !vvtEnabled }'
       wmiTbl:
+        type: subMenu
         title: WMI duty cycle
         page: 8
         condition: '{ !vvtEnabled && wmiEnabled && wmiMode > 1 }'
       tacho:
+        type: subMenu
         title: Tacho Output
         page: 0
         condition: ''
       can_serial3IO:
+        type: subMenu
         title: Canbus/Secondary Serial IO Interface
         page: 0
         condition: ''
       Canin_config:
+        type: subMenu
         title: External Auxillary Input Channel Configuration
         page: 0
         condition: '{enable_secondarySerial || (enable_intcan && intcan_available)}'
       Auxin_config:
+        type: subMenu
         title: Local Auxillary Input Channel Configuration
         page: 0
         condition: ''
       serial3IO:
+        type: subMenu
         title: Canbus/Secondary Serial IO Interface
         page: 0
         condition: ''
       pressureSensors:
+        type: subMenu
         title: Fuel/Oil pressure
         page: 0
         condition: ''
@@ -58735,22 +58799,27 @@ menus:
     title: Tools
     subMenus:
       mapCal:
+        type: subMenu
         title: Calibrate Pressure Sensors
         page: 0
         condition: ''
       batCal:
+        type: subMenu
         title: Calibrate Voltage Reading
         page: 0
         condition: ''
       std_ms2gentherm:
+        type: subMenu
         title: Calibrate Temperature Sensors
         page: 0
         condition: ''
       std_ms2geno2:
+        type: subMenu
         title: Calibrate AFR Sensor
         page: 0
         condition: '{ egoType > 0 }'
       sensorFilters:
+        type: subMenu
         title: Set analog sensor filters
         page: 0
         condition: ''
@@ -58761,14 +58830,17 @@ menus:
     title: 3D Tuning Maps
     subMenus:
       veTable1Map:
+        type: subMenu
         title: Fuel Table
         page: 0
         condition: ''
       sparkMap:
+        type: subMenu
         title: Spark Table
         page: 3
         condition: ''
       afrTable1Map:
+        type: subMenu
         title: AFR Target Table
         page: 0
         condition: ''
@@ -58776,10 +58848,12 @@ menus:
     title: Hardware Testing
     subMenus:
       outputtest1:
+        type: subMenu
         title: Test Output Hardware
         page: 0
         condition: ''
       stm32cmd:
+        type: subMenu
         title: STM32 Commands
         page: 0
         condition: ''
@@ -58787,6 +58861,7 @@ menus:
     title: Help
     subMenus:
       helpGeneral:
+        type: subMenu
         title: Speeduino Help
         page: 0
         condition: ''

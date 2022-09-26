@@ -20,16 +20,16 @@
     "test": "npm run build && node test/test.js"
   },
   "devDependencies": {
-    "@hyper-tuner/eslint-config": "^0.1.2",
+    "@hyper-tuner/eslint-config": "^0.1.6",
     "@types/js-yaml": "^4.0.5",
-    "@types/node": "^18.7.18",
+    "@types/node": "^18.7.22",
     "@types/parsimmon": "^1.10.6",
     "eslint-plugin-modules-newline": "^0.0.6",
-    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "typescript": "^4.8.3"
   },
   "dependencies": {
-    "@hyper-tuner/types": "^0.3.0",
+    "@hyper-tuner/types": "^0.4.0",
     "js-yaml": "^4.1.0",
     "parsimmon": "^1.18.1"
   }

@@ -1,7 +1,8 @@
-import * as P from 'parsimmon';
+import P from 'parsimmon';
 import {
   Config as ConfigType,
   Constant,
+  GroupMenu,
 } from '@hyper-tuner/types';
 import { ParserInterface } from './parserInterface';
 
@@ -43,6 +44,8 @@ export class INI implements ParserInterface {
   currentPanel?: string;
 
   currentMenu?: string;
+
+  currentGroupMenu?: string;
 
   currentCurve?: string;
 
@@ -801,10 +804,76 @@ export class INI implements ParserInterface {
         title: INI.sanitize(title),
         subMenus: {},
       };
+
       return;
     }
 
     if (this.currentMenu) {
+      // parse groupMenu
+      // groupMenu = "Engine Protection"
+      const groupMenuResult = P
+        .seqObj<any>(
+          P.string('groupMenu'),
+          this.space, this.equal, this.space,
+          ['title', this.notQuote.wrap(...this.quotes)],
+          P.all,
+        )
+        .parse(line);
+
+      if (groupMenuResult.status) {
+        const title = INI
+          .sanitize(groupMenuResult.value.title);
+        const name = title
+          .toLowerCase()
+          .replace(/([^\w]\w)/g, (g) => g[1].toUpperCase()); // camelCase
+
+        this.currentGroupMenu = name;
+        this.result.menus[this.currentMenu].subMenus[name] = {
+          type: 'groupMenu',
+          title: INI.sanitize(title),
+          groupChildMenus: {},
+        };
+
+        return;
+      }
+
+      // parse groupChildMenu
+      if (this.currentGroupMenu && line.startsWith('groupChildMenu')) {
+        // groupChildMenu = std_separator
+        const base: any = [
+          P.string('groupChildMenu'),
+          this.space, this.equal, this.space,
+          ['name', this.name],
+        ];
+
+        // groupChildMenu = engineProtection, "Common Engine Protection"
+        const withTitle: any = [
+          ...base,
+          ...this.delimiter,
+          ['title', this.notQuote.wrap(...this.quotes)],
+        ];
+
+        // groupChildMenu = revLimiterDialog, "Rev Limiters", { engineProtectType }
+        const full: any = [
+          ...withTitle,
+          ...this.delimiter,
+          ['condition', this.expression],
+          P.all,
+        ];
+
+        const groupChildMenuResult = P.seqObj<any>(...full, P.all)
+          .or(P.seqObj<any>(...withTitle, P.all))
+          .or(P.seqObj<any>(...base, P.all))
+          .tryParse(line);
+
+        (this.result.menus[this.currentMenu].subMenus[this.currentGroupMenu] as GroupMenu).groupChildMenus[groupChildMenuResult.name] = {
+          title: INI.sanitize(groupChildMenuResult.title),
+          condition: groupChildMenuResult.condition ? INI.sanitize(groupChildMenuResult.condition) : '',
+        };
+
+        return;
+      }
+
       // subMenu = std_separator
       const base: any = [
         P.string('subMenu'),
@@ -849,6 +918,7 @@ export class INI implements ParserInterface {
         .tryParse(line);
 
       this.result.menus[this.currentMenu].subMenus[subMenuResult.name] = {
+        type: 'subMenu',
         title: INI.sanitize(subMenuResult.title),
         page: Number(subMenuResult.page || 0),
         condition: subMenuResult.condition ? INI.sanitize(subMenuResult.condition) : '',
