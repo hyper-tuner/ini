@@ -8848,7 +8848,7 @@ constants:
             - INVALID
             - INVALID
             - INVALID
-        unused2-95:
+        unused2_95:
           type: scalar
           size: U08
           offset: 127

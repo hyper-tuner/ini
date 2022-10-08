@@ -1025,6 +1025,7 @@ export class INI implements ParserInterface {
 
     if (INI.isNumber(this.currentPage)) {
       const result = this.parseConstAndVar(line);
+      const name = result.name.replaceAll('-', '_'); // unused2-95
 
       if (!this.result.constants.pages[this.currentPage!]) {
         this.result.constants.pages[this.currentPage!] = {
@@ -1069,19 +1070,19 @@ export class INI implements ParserInterface {
             size: result.size,
             offset: Number(result.offset),
             address: result.address.split(':').map(Number),
-            values: this.resolveBitsValues(result.name, result.values || []),
+            values: this.resolveBitsValues(name, result.values || []),
           };
           break;
         default:
           break;
       }
 
-      if (this.result.constants.pages[this.currentPage!].data[result.name]) {
+      if (this.result.constants.pages[this.currentPage!].data[name]) {
         // TODO: if else
         return;
       }
 
-      this.result.constants.pages[this.currentPage!].data[result.name] = constant;
+      this.result.constants.pages[this.currentPage!].data[name] = constant;
     }
   }
 
