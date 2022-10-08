@@ -7777,7 +7777,7 @@ constants:
           min: 0
           max: 16320
           digits: 0
-        unused2-95:
+        unused2_95:
           type: array
           size: U08
           offset: 126
@@ -8921,7 +8921,7 @@ constants:
           values:
             - Advance
             - Retard
-        unusedBits4-123:
+        unusedBits4_123:
           type: bits
           size: U08
           offset: 123
@@ -8949,7 +8949,7 @@ constants:
           min: 0
           max: 240
           digits: 0
-        unused4-124:
+        unused4_124:
           type: array
           size: U08
           offset: 126
