@@ -20,7 +20,8 @@
     "prepublishOnly": "npm run build",
     "start": "tsc --watch",
     "lint": "tsc && eslint --max-warnings=0 src/**/*.ts src/*.ts",
-    "test": "npm run build && node test/test.js"
+    "test": "npm run build && node test/test.js",
+    "generate": "npm run build && node test/test.js generate"
   },
   "devDependencies": {
     "@hyper-tuner/eslint-config": "^0.1.6",
