@@ -26,8 +26,16 @@ npm i --save @hyper-tuner/ini
 
 ## CLI capabilities
 
-You can also run this package as a CLI tool, example:
+You can also run this package as a CLI tool.
+
+First you need to provide PAT as a ENV:
 
 ```bash
-npx @hyper-tuner/ini validate test/data/ini/202207.ini
+export NPM_GITHUB_TOKEN=my_github_personal_access_token
+```
+
+No you can run the tool:
+
+```bash
+npx hyper-tuner/ini validate test/data/ini/202103.ini
 ```

@@ -14,7 +14,7 @@ const loadFile = (filename: string) => {
 
 const showUsage = () => {
   console.info('\nℹ Usage:');
-  console.info('hypertuner-ini validate some_ini_file.ini');
+  console.info('npx hyper-tuner/ini validate some_ini_file.ini');
   process.exit(1);
 };
 
