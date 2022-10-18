@@ -10,7 +10,7 @@
   "main": "dist/ini.js",
   "types": "dist/ini.d.ts",
   "bin": {
-    "hypertuner-ini": "dist/cli.js"
+    "hyper-tuner-ini": "dist/cli.js"
   },
   "files": [
     "dist"
