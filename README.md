@@ -28,10 +28,14 @@ npm i --save @hyper-tuner/ini
 
 You can also run this package as a CLI tool.
 
-First you need to provide PAT as a ENV:
+First you need to authenticate to GitHub Packages:
 
 ```bash
-export NPM_GITHUB_TOKEN=my_github_personal_access_token
+npm login --scope=@hyper-tuner --registry=https://npm.pkg.github.com
+
+> Username: USERNAME
+> Password: TOKEN
+> Email: PUBLIC-EMAIL-ADDRESS
 ```
 
 No you can run the tool:
