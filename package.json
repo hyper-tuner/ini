@@ -1,7 +1,7 @@
 {
   "name": "@hyper-tuner/ini",
   "description": "HyperTuner INI parser",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "license": "MIT",
   "repository": {
     "type": "git",
