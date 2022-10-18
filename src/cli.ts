@@ -2,8 +2,10 @@
 
 import { INI } from './ini';
 import fs from 'fs';
+import { version } from '.';
 
 enum Commands {
+  VERSION = 'version',
   VALIDATE = 'validate',
 }
 
@@ -16,6 +18,10 @@ const showUsage = () => {
   console.info('\nℹ Usage:');
   console.info('npx hyper-tuner/ini validate some_ini_file.ini');
   process.exit(1);
+};
+
+const showVersion = () => {
+  console.info(`\nℹ Version: ${version}`);
 };
 
 const validate = (filename: string) => {
@@ -41,15 +47,19 @@ if (!command) {
   process.exit(1);
 }
 
-if (!filename) {
-  console.info('❗️ Please provide a file name');
-  showUsage();
-  process.exit(1);
-}
-
 switch (command) {
   case Commands.VALIDATE:
+    if (!filename) {
+      console.info('❗️ Please provide a file name');
+      showUsage();
+      process.exit(1);
+    }
+    showVersion();
     validate(filename);
+    break;
+
+  case Commands.VERSION:
+    showVersion();
     break;
 
   default:
