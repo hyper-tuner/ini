@@ -23,3 +23,11 @@ Proceed with the installation:
 ```bash
 npm i --save @hyper-tuner/ini
 ```
+
+## CLI capabilities
+
+You can also run this package as a CLI tool, example:
+
+```bash
+npx @hyper-tuner/ini validate test/data/ini/202207.ini
+```
