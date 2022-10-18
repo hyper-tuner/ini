@@ -11,7 +11,7 @@
 Make sure you have registry specified in the `.npmrc` file:
 
 ```bash
-@speedy-tuner:registry=https://npm.pkg.github.com
+@hyper-tuner:registry=https://npm.pkg.github.com
 ```
 
 Authenticate to GitHub Packages:
