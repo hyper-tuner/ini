@@ -55,7 +55,7 @@ export class INI implements ParserInterface {
 
   constructor(buffer: ArrayBuffer) {
     this.space = P.optWhitespace;
-    this.expression = P.regexp(/{.+?}|(([a-z])([A-z\d]+))/);
+    this.expression = P.regexp(/{.+?}|(([a-z])([A-Za-z\d]+))/);
     this.numbers = P.regexp(/[0-9.-]*/);
     this.name = P.regexp(/[0-9a-z_\\-]*/i);
     this.equal = P.string('=');
