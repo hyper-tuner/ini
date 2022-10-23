@@ -1,7 +1,7 @@
 {
   "name": "@hyper-tuner/ini",
   "description": "HyperTuner INI parser",
-  "version": "0.6.3",
+  "version": "0.6.2",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "postinstall": "npm run build",
+    "prepare": "npm run build",
     "start": "tsc --watch",
     "lint": "tsc && eslint --max-warnings=0 src/**/*.ts src/*.ts",
     "test": "npm run build && node test/test.js",
