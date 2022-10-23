@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepublishOnly": "npm run build",
+    "prepare": "npm run build",
     "start": "tsc --watch",
     "lint": "tsc && eslint --max-warnings=0 src/**/*.ts src/*.ts",
     "test": "npm run build && node test/test.js",
