@@ -9,6 +9,7 @@ const { INI } = require('../dist');
 const VERSIONS = [
   '202207',
   '202202',
+  '202201',
   '202108',
   '202103',
   '202012',
@@ -45,13 +46,12 @@ const run = (generateOnly) => {
       const yamlNew = md5YamlNew.update(yamlContent).digest('hex');
       const jsonNew = md5JsonNew.update(jsonContent).digest('hex');
 
-      const { yamlOld, jsonOld } = hashReference(version);
-
       // write temp files to disk so we can debug more easily
       fs.writeFileSync(pathFor(`tmp/${version}.yml`), yamlContent);
       fs.writeFileSync(pathFor(`tmp/${version}.json`), jsonContent);
 
       if (!generateOnly) {
+        const { yamlOld, jsonOld } = hashReference(version);
         assert.equal(yamlNew, yamlOld, `Generated file ${version}.yaml looks different than expected`);
         assert.equal(jsonNew, jsonOld, `Generated file ${version}.json looks different than expected`);
       }
