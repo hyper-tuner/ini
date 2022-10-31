@@ -15,14 +15,14 @@ const VERSIONS = [
   '202012',
 ];
 
-const pathFor = (file) => path.join(__dirname, `/../test/data/${file}`);
+const pathFor = (ecosystem, file) => path.join(__dirname, `/../test/data/${ecosystem}/${file}`);
 
 const hashReference = (version) => {
   const md5Yaml = crypto.createHash('md5');
   const md5Json = crypto.createHash('md5');
 
-  md5Yaml.update(fs.readFileSync(pathFor(`yaml/${version}.yml`), 'utf8'));
-  md5Json.update(fs.readFileSync(pathFor(`json/${version}.json`), 'utf8'));
+  md5Yaml.update(fs.readFileSync(pathFor('speeduino', `yaml/${version}.yml`), 'utf8'));
+  md5Json.update(fs.readFileSync(pathFor('speeduino', `json/${version}.json`), 'utf8'));
 
   return {
     yamlOld: md5Yaml.digest('hex'),
@@ -32,7 +32,7 @@ const hashReference = (version) => {
 
 const run = (generateOnly) => {
   VERSIONS.forEach((version) => {
-    fs.readFile(pathFor(`ini/${version}.ini`), 'utf8', (_err, data) => {
+    fs.readFile(pathFor('speeduino', `ini/${version}.ini`), 'utf8', (_err, data) => {
       const result = new INI((new TextEncoder()).encode(data))
         .parse()
         .getResults();
@@ -47,8 +47,8 @@ const run = (generateOnly) => {
       const jsonNew = md5JsonNew.update(jsonContent).digest('hex');
 
       // write temp files to disk so we can debug more easily
-      fs.writeFileSync(pathFor(`tmp/${version}.yml`), yamlContent);
-      fs.writeFileSync(pathFor(`tmp/${version}.json`), jsonContent);
+      fs.writeFileSync(pathFor('speeduino', `tmp/${version}.yml`), yamlContent);
+      fs.writeFileSync(pathFor('speeduino', `tmp/${version}.json`), jsonContent);
 
       if (!generateOnly) {
         const { yamlOld, jsonOld } = hashReference(version);
@@ -56,8 +56,8 @@ const run = (generateOnly) => {
         assert.equal(jsonNew, jsonOld, `Generated file ${version}.json looks different than expected`);
       }
 
-      // fs.unlinkSync(pathFor(`tmp/${version}.yml`));
-      // fs.unlinkSync(pathFor(`tmp/${version}.json`));
+      // fs.unlinkSync(pathFor('speeduino', `tmp/${version}.yml`));
+      // fs.unlinkSync(pathFor('speeduino', `tmp/${version}.json`));
     });
   });
 };
