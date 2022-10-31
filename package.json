@@ -24,7 +24,7 @@
     "generate": "npm run build && node test/test.js generate"
   },
   "devDependencies": {
-    "@hyper-tuner/eslint-config": "^0.1.6",
+    "@hyper-tuner/eslint-config": "git+https://github.com/hyper-tuner/eslint-config.git",
     "@types/js-yaml": "^4.0.5",
     "@types/node": "^18.11.8",
     "@types/parsimmon": "^1.10.6",
@@ -33,7 +33,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "@hyper-tuner/types": "^0.4.0",
+    "@hyper-tuner/types": "git+https://github.com/hyper-tuner/types.git",
     "js-yaml": "^4.1.0",
     "parsimmon": "^1.18.1"
   }
