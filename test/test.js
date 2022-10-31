@@ -15,6 +15,10 @@ const SPEEDUINO_VERSIONS = [
   '202012',
 ];
 
+const RUSEFI_VERSIONS = [
+  'rusefi_mre_f4',
+];
+
 const pathFor = (ecosystem, file) => path.join(__dirname, `/../test/data/${ecosystem}/${file}`);
 
 const hashReference = (ecosystem, version) => {
@@ -64,6 +68,7 @@ const runFor = (ecosystem, versions, generateOnly) => {
 
 const run = (generateOnly) => {
   runFor('speeduino', SPEEDUINO_VERSIONS, generateOnly);
+  runFor('rusefi', RUSEFI_VERSIONS, generateOnly);
 };
 
 run(process.argv[2] === 'generate');

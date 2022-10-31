@@ -56,7 +56,7 @@ export class INI implements ParserInterface {
   constructor(buffer: ArrayBuffer) {
     this.space = P.optWhitespace;
     this.expression = P.regexp(/{.+?}|(([a-z])([A-Za-z\d]+))/);
-    this.numbers = P.regexp(/[0-9.-]*/);
+    this.numbers = P.regexp(/[0-9.E-]*/);
     this.name = P.regexp(/[0-9a-z_\\-]*/i);
     this.equal = P.string('=');
     this.quote = P.string('"');
@@ -1199,12 +1199,24 @@ export class INI implements ParserInterface {
       P.all,
     );
 
+    // predefined constant continuousChannelValue (in pcVariables)
+    // TODO: investigate this
+    const continuousChannelValue = P.seqObj<any>(
+      ['name', this.name],
+      this.space, this.equal, this.space,
+      ['reference', this.name],
+      ...this.delimiter,
+      ['channel', this.name],
+      P.all,
+    );
+
     return scalar
       .or(scalarShort)
       .or(array)
       .or(bits)
       .or(bitsShort)
       .or(string)
+      .or(continuousChannelValue)
       .tryParse(line);
   }
 
