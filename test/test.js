@@ -6,7 +6,7 @@ const yaml = require('js-yaml');
 const crypto = require('crypto');
 const { INI } = require('../dist');
 
-const VERSIONS = [
+const SPEEDUINO_VERSIONS = [
   '202207',
   '202202',
   '202201',
@@ -17,12 +17,12 @@ const VERSIONS = [
 
 const pathFor = (ecosystem, file) => path.join(__dirname, `/../test/data/${ecosystem}/${file}`);
 
-const hashReference = (version) => {
+const hashReference = (ecosystem, version) => {
   const md5Yaml = crypto.createHash('md5');
   const md5Json = crypto.createHash('md5');
 
-  md5Yaml.update(fs.readFileSync(pathFor('speeduino', `yaml/${version}.yml`), 'utf8'));
-  md5Json.update(fs.readFileSync(pathFor('speeduino', `json/${version}.json`), 'utf8'));
+  md5Yaml.update(fs.readFileSync(pathFor(ecosystem, `yaml/${version}.yml`), 'utf8'));
+  md5Json.update(fs.readFileSync(pathFor(ecosystem, `json/${version}.json`), 'utf8'));
 
   return {
     yamlOld: md5Yaml.digest('hex'),
@@ -30,9 +30,9 @@ const hashReference = (version) => {
   };
 };
 
-const run = (generateOnly) => {
-  VERSIONS.forEach((version) => {
-    fs.readFile(pathFor('speeduino', `ini/${version}.ini`), 'utf8', (_err, data) => {
+const runFor = (ecosystem, versions, generateOnly) => {
+  versions.forEach((version) => {
+    fs.readFile(pathFor(ecosystem, `ini/${version}.ini`), 'utf8', (_err, data) => {
       const result = new INI((new TextEncoder()).encode(data))
         .parse()
         .getResults();
@@ -47,19 +47,23 @@ const run = (generateOnly) => {
       const jsonNew = md5JsonNew.update(jsonContent).digest('hex');
 
       // write temp files to disk so we can debug more easily
-      fs.writeFileSync(pathFor('speeduino', `tmp/${version}.yml`), yamlContent);
-      fs.writeFileSync(pathFor('speeduino', `tmp/${version}.json`), jsonContent);
+      fs.writeFileSync(pathFor(ecosystem, `tmp/${version}.yml`), yamlContent);
+      fs.writeFileSync(pathFor(ecosystem, `tmp/${version}.json`), jsonContent);
 
       if (!generateOnly) {
-        const { yamlOld, jsonOld } = hashReference(version);
+        const { yamlOld, jsonOld } = hashReference(ecosystem, version);
         assert.equal(yamlNew, yamlOld, `Generated file ${version}.yaml looks different than expected`);
         assert.equal(jsonNew, jsonOld, `Generated file ${version}.json looks different than expected`);
       }
 
-      // fs.unlinkSync(pathFor('speeduino', `tmp/${version}.yml`));
-      // fs.unlinkSync(pathFor('speeduino', `tmp/${version}.json`));
+      // fs.unlinkSync(pathFor(ecosystem, `tmp/${version}.yml`));
+      // fs.unlinkSync(pathFor(ecosystem, `tmp/${version}.json`));
     });
   });
+};
+
+const run = (generateOnly) => {
+  runFor('speeduino', SPEEDUINO_VERSIONS, generateOnly);
 };
 
 run(process.argv[2] === 'generate');
