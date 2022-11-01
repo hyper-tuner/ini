@@ -26,7 +26,7 @@
   "devDependencies": {
     "@hyper-tuner/eslint-config": "git+https://github.com/hyper-tuner/eslint-config.git",
     "@types/js-yaml": "^4.0.5",
-    "@types/node": "^18.11.8",
+    "@types/node": "^18.11.9",
     "@types/parsimmon": "^1.10.6",
     "eslint-plugin-modules-newline": "^0.0.6",
     "eslint-plugin-prettier": "^4.2.1",
