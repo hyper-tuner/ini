@@ -15,8 +15,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-.eslintcache
-
 # # temp test data
 # /test/data/tmp/*
 # !/test/data/tmp/.keep

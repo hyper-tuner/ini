@@ -19,21 +19,21 @@
     "build": "tsc",
     "prepare": "npm run build",
     "start": "tsc --watch",
-    "lint": "tsc && eslint --max-warnings=0 src/**/*.ts src/*.ts",
+    "generate": "npm run build && node test/test.js generate",
     "test": "npm run build && node test/test.js",
-    "generate": "npm run build && node test/test.js generate"
+    "lint": "tsc && rome ci src",
+    "lint:fix": "rome format --write src && rome check --apply src",
+    "lint:fix:suggested": "rome check --apply-suggested src"
   },
   "devDependencies": {
-    "@hyper-tuner/eslint-config": "^0.1.7",
     "@types/js-yaml": "^4.0.5",
-    "@types/node": "^18.11.9",
+    "@types/node": "^18.11.10",
     "@types/parsimmon": "^1.10.6",
-    "eslint-plugin-modules-newline": "^0.0.6",
-    "eslint-plugin-prettier": "^4.2.1",
-    "typescript": "^4.8.4"
+    "rome": "^10.0.1",
+    "typescript": "^4.9.3"
   },
   "dependencies": {
-    "@hyper-tuner/types": "^0.4.1",
+    "@hyper-tuner/types": "^0.4.2",
     "js-yaml": "^4.1.0",
     "parsimmon": "^1.18.1"
   }

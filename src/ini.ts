@@ -1,9 +1,5 @@
 import P from 'parsimmon';
-import {
-  Config as ConfigType,
-  Constant,
-  GroupMenu,
-} from '@hyper-tuner/types';
+import { Config as ConfigType, Constant, GroupMenu } from '@hyper-tuner/types';
 import { ParserInterface } from './parserInterface';
 
 export class INI implements ParserInterface {
@@ -69,7 +65,7 @@ export class INI implements ParserInterface {
     this.inQuotes = this.notQuote.trim(this.space).wrap(...this.quotes);
     this.values = P.regexp(/[^,;]*/).trim(this.space).sepBy(this.comma);
 
-    this.lines = (new TextDecoder()).decode(buffer).split('\n');
+    this.lines = new TextDecoder().decode(buffer).split('\n');
 
     this.currentPage = undefined;
     this.currentDialog = undefined;
@@ -120,15 +116,18 @@ export class INI implements ParserInterface {
       const line = raw.trim();
       // skip empty lines and lines with comments only
       // skip #if for now
-      if (line === '' || line.startsWith(';') || (line.startsWith('#') && !line.startsWith('#define'))) {
+      if (
+        line === '' ||
+        line.startsWith(';') ||
+        (line.startsWith('#') && !line.startsWith('#define'))
+      ) {
         return;
       }
 
-      const result = P
-        .seqObj<any>(
-          ['section', P.letters.wrap(P.string('['), P.string(']'))],
-          P.all,
-        ).parse(line);
+      const result = P.seqObj<any>(
+        ['section', P.letters.wrap(P.string('['), P.string(']'))],
+        P.all,
+      ).parse(line);
 
       // top level section found
       if (result.status) {
@@ -144,39 +143,50 @@ export class INI implements ParserInterface {
 
   private parseSectionLine(section: string, line: string) {
     switch (section) {
-      case 'MegaTune':
+      case 'MegaTune': {
         this.parseKeyValueFor('megaTune', line);
         break;
-      case 'TunerStudio':
+      }
+      case 'TunerStudio': {
         this.parseKeyValueFor('tunerStudio', line);
         break;
-      case 'PcVariables':
+      }
+      case 'PcVariables': {
         this.parsePcVariables(line);
         break;
-      case 'Constants':
+      }
+      case 'Constants': {
         this.parseConstants(line);
         break;
-      case 'Menu':
+      }
+      case 'Menu': {
         this.parseMenu(line);
         break;
-      case 'SettingContextHelp':
+      }
+      case 'SettingContextHelp': {
         this.parseKeyValueFor('help', line);
         break;
-      case 'UserDefined':
+      }
+      case 'UserDefined': {
         this.parseDialogs(line);
         break;
-      case 'CurveEditor':
+      }
+      case 'CurveEditor': {
         this.parseCurves(line);
         break;
-      case 'TableEditor':
+      }
+      case 'TableEditor': {
         this.parseTables(line);
         break;
-      case 'OutputChannels':
+      }
+      case 'OutputChannels': {
         this.parseOutputChannels(line);
         break;
-      case 'Datalog':
+      }
+      case 'Datalog': {
         this.parseDatalog(line);
         break;
+      }
       default:
         break;
     }
@@ -185,35 +195,22 @@ export class INI implements ParserInterface {
   private parseDatalog(line: string) {
     const base: any = [
       P.string('entry'),
-      this.space, this.equal, this.space,
+      this.space,
+      this.equal,
+      this.space,
       ['name', this.name],
       ...this.delimiter,
     ];
-    const type: any = [
-      ...this.delimiter,
-      ['type', P.regexp(/float|int/)],
-    ];
-    const format: any = [
-      ...this.delimiter,
-      ['format', this.notQuote.wrap(...this.quotes)],
-    ];
+    const type: any = [...this.delimiter, ['type', P.regexp(/float|int/)]];
+    const format: any = [...this.delimiter, ['format', this.notQuote.wrap(...this.quotes)]];
     const noConditions = [
       ...base,
       ['label', this.notQuote.wrap(...this.quotes)],
       ...type,
       ...format,
     ];
-    const withConditions = [
-      ...noConditions,
-      ...this.delimiter,
-      ['condition', this.expression],
-    ];
-    const labelExpression = [
-      ...base,
-      ['label', this.expression],
-      ...type,
-      ...format,
-    ];
+    const withConditions = [...noConditions, ...this.delimiter, ['condition', this.expression]];
+    const labelExpression = [...base, ['label', this.expression], ...type, ...format];
     const labelExpressionWithCondition = [
       ...labelExpression,
       ...this.delimiter,
@@ -245,35 +242,21 @@ export class INI implements ParserInterface {
         offset: Number(result.offset),
         units: INI.sanitize(result.units),
         scale: INI.isNumber(result.scale) ? Number(result.scale) : INI.sanitize(result.scale),
-        transform: INI.isNumber(result.transform) ? Number(result.transform) : INI.sanitize(result.transform),
+        transform: INI.isNumber(result.transform)
+          ? Number(result.transform)
+          : INI.sanitize(result.transform),
       };
       return;
     } catch (_) {
-      const base: any = [
-        ['name', this.name],
-        this.space, this.equal, this.space,
-      ];
+      const base: any = [['name', this.name], this.space, this.equal, this.space];
 
       // TODO: throttle   = { tps }, "%"
       // ochGetCommand    = "r\$tsCanId\x30%2o%2c"
       // ochBlockSize     =  117
       // coolant          = { coolantRaw - 40 }
-      const result = P
-        .seqObj<any>(
-          ...base,
-          ['value', this.notQuote.wrap(...this.quotes)],
-          P.all,
-        )
-        .or(P.seqObj<any>(
-          ...base,
-          ['value', this.expression],
-          P.all,
-        ))
-        .or(P.seqObj<any>(
-          ...base,
-          ['value', this.numbers],
-          P.all,
-        ))
+      const result = P.seqObj<any>(...base, ['value', this.notQuote.wrap(...this.quotes)], P.all)
+        .or(P.seqObj<any>(...base, ['value', this.expression], P.all))
+        .or(P.seqObj<any>(...base, ['value', this.numbers], P.all))
         .tryParse(line);
 
       this.result.outputChannels[result.name] = {
@@ -286,7 +269,9 @@ export class INI implements ParserInterface {
     // table = veTable1Tbl,  veTable1Map, "VE Table", 2
     const tableResult = P.seqObj<any>(
       P.string('table'),
-      this.space, this.equal, this.space,
+      this.space,
+      this.equal,
+      this.space,
       ['name', this.name],
       ...this.delimiter,
       ['map', this.name],
@@ -318,7 +303,9 @@ export class INI implements ParserInterface {
     // topicHelp = "http://speeduino.com/wiki/index.php/Tuning"
     const helpResult = P.seqObj<any>(
       P.string('topicHelp'),
-      this.space, this.equal, this.space,
+      this.space,
+      this.equal,
+      this.space,
       ['help', this.inQuotes],
       P.all,
     ).parse(line);
@@ -338,22 +325,22 @@ export class INI implements ParserInterface {
     // zBins       = veTable
     // gridOrient  = 250,   0, 340
     // upDownLabel = "(RICHER)", "(LEANER)"
-    const parseBins = (name: string) => P.seqObj<any>(
-      P.string(name),
-      this.space, this.equal, this.space,
-      ['values', this.values],
-      P.all,
-    ).parse(line);
+    const parseBins = (name: string) =>
+      P.seqObj<any>(
+        P.string(name),
+        this.space,
+        this.equal,
+        this.space,
+        ['values', this.values],
+        P.all,
+      ).parse(line);
 
     const xBinsResult = parseBins('xBins');
     if (xBinsResult.status) {
       if (!this.currentTable) {
         throw new Error('Table not set');
       }
-      this.result.tables[this.currentTable].xBins = xBinsResult
-        .value
-        .values
-        .map(INI.sanitize);
+      this.result.tables[this.currentTable].xBins = xBinsResult.value.values.map(INI.sanitize);
 
       return;
     }
@@ -363,10 +350,7 @@ export class INI implements ParserInterface {
       if (!this.currentTable) {
         throw new Error('Table not set');
       }
-      this.result.tables[this.currentTable].yBins = yBinsResult
-        .value
-        .values
-        .map(INI.sanitize);
+      this.result.tables[this.currentTable].yBins = yBinsResult.value.values.map(INI.sanitize);
 
       return;
     }
@@ -376,10 +360,9 @@ export class INI implements ParserInterface {
       if (!this.currentTable) {
         throw new Error('Table not set');
       }
-      this.result.tables[this.currentTable].xyLabels = yxLabelsResult
-        .value
-        .values
-        .map(INI.sanitize);
+      this.result.tables[this.currentTable].xyLabels = yxLabelsResult.value.values.map(
+        INI.sanitize,
+      );
 
       return;
     }
@@ -389,10 +372,7 @@ export class INI implements ParserInterface {
       if (!this.currentTable) {
         throw new Error('Table not set');
       }
-      this.result.tables[this.currentTable].zBins = zBinsResult
-        .value
-        .values
-        .map(INI.sanitize);
+      this.result.tables[this.currentTable].zBins = zBinsResult.value.values.map(INI.sanitize);
 
       return;
     }
@@ -400,7 +380,9 @@ export class INI implements ParserInterface {
     // gridHeight  = 2.0
     const gridHeightResult = P.seqObj<any>(
       P.string('gridHeight'),
-      this.space, this.equal, this.space,
+      this.space,
+      this.equal,
+      this.space,
       ['gridHeight', this.numbers],
       P.all,
     ).parse(line);
@@ -419,10 +401,7 @@ export class INI implements ParserInterface {
       if (!this.currentTable) {
         throw new Error('Table not set');
       }
-      this.result.tables[this.currentTable].gridOrient = gridOrientResult
-        .value
-        .values
-        .map(Number);
+      this.result.tables[this.currentTable].gridOrient = gridOrientResult.value.values.map(Number);
 
       return;
     }
@@ -432,10 +411,9 @@ export class INI implements ParserInterface {
       if (!this.currentTable) {
         throw new Error('Table not set');
       }
-      this.result.tables[this.currentTable].upDownLabel = upDownResult
-        .value
-        .values
-        .map(INI.sanitize);
+      this.result.tables[this.currentTable].upDownLabel = upDownResult.value.values.map(
+        INI.sanitize,
+      );
     }
   }
 
@@ -443,7 +421,9 @@ export class INI implements ParserInterface {
     // curve = time_accel_tpsdot_curve, "TPS based AE"
     const curveResult = P.seqObj<any>(
       P.string('curve'),
-      this.space, this.equal, this.space,
+      this.space,
+      this.equal,
+      this.space,
       ['name', this.name],
       ...this.delimiter,
       ['title', this.inQuotes],
@@ -468,7 +448,9 @@ export class INI implements ParserInterface {
     // columnLabel = "TPSdot", "Added"
     const labelsResult = P.seqObj<any>(
       P.string('columnLabel'),
-      this.space, this.equal, this.space,
+      this.space,
+      this.equal,
+      this.space,
       ['labels', this.values],
       P.all,
     ).parse(line);
@@ -477,10 +459,7 @@ export class INI implements ParserInterface {
       if (!this.currentCurve) {
         throw new Error('Curve not set');
       }
-      this.result.curves[this.currentCurve].labels = labelsResult
-        .value
-        .labels
-        .map(INI.sanitize);
+      this.result.curves[this.currentCurve].labels = labelsResult.value.labels.map(INI.sanitize);
 
       return;
     }
@@ -489,22 +468,24 @@ export class INI implements ParserInterface {
     // yAxis = 0, 1200, 6
     // xBins = taeBins, TPSdot
     // yBins = taeRates
-    const parseAxis = (name: string) => P.seqObj<any>(
-      P.string(name),
-      this.space, this.equal, this.space,
-      ['values', this.values],
-      P.all,
-    ).parse(line);
+    const parseAxis = (name: string) =>
+      P.seqObj<any>(
+        P.string(name),
+        this.space,
+        this.equal,
+        this.space,
+        ['values', this.values],
+        P.all,
+      ).parse(line);
 
     const xAxisResult = parseAxis('xAxis');
     if (xAxisResult.status) {
       if (!this.currentCurve) {
         throw new Error('Curve not set');
       }
-      this.result.curves[this.currentCurve].xAxis = xAxisResult
-        .value
-        .values
-        .map((val: string) => INI.isNumber(val) ? Number(val) : INI.sanitize(val));
+      this.result.curves[this.currentCurve].xAxis = xAxisResult.value.values.map((val: string) =>
+        INI.isNumber(val) ? Number(val) : INI.sanitize(val),
+      );
 
       return;
     }
@@ -514,10 +495,9 @@ export class INI implements ParserInterface {
       if (!this.currentCurve) {
         throw new Error('Curve not set');
       }
-      this.result.curves[this.currentCurve].yAxis = yAxisResult
-        .value
-        .values
-        .map((val: string) => INI.isNumber(val) ? Number(val) : INI.sanitize(val));
+      this.result.curves[this.currentCurve].yAxis = yAxisResult.value.values.map((val: string) =>
+        INI.isNumber(val) ? Number(val) : INI.sanitize(val),
+      );
 
       return;
     }
@@ -527,10 +507,9 @@ export class INI implements ParserInterface {
       if (!this.currentCurve) {
         throw new Error('Curve not set');
       }
-      this.result.curves[this.currentCurve].xBins = xBinsResult
-        .value
-        .values
-        .map((val: string) => INI.isNumber(val) ? Number(val) : INI.sanitize(val));
+      this.result.curves[this.currentCurve].xBins = xBinsResult.value.values.map((val: string) =>
+        INI.isNumber(val) ? Number(val) : INI.sanitize(val),
+      );
 
       return;
     }
@@ -540,10 +519,9 @@ export class INI implements ParserInterface {
       if (!this.currentCurve) {
         throw new Error('Curve not set');
       }
-      this.result.curves[this.currentCurve].yBins = yBinsResult
-        .value
-        .values
-        .map((val: string) => INI.isNumber(val) ? Number(val) : INI.sanitize(val));
+      this.result.curves[this.currentCurve].yBins = yBinsResult.value.values.map((val: string) =>
+        INI.isNumber(val) ? Number(val) : INI.sanitize(val),
+      );
 
       return;
     }
@@ -553,28 +531,28 @@ export class INI implements ParserInterface {
       if (!this.currentCurve) {
         throw new Error('Curve not set');
       }
-      this.result.curves[this.currentCurve].size = size
-        .value
-        .values
-        .map((val: string) => INI.isNumber(val) ? Number(val) : INI.sanitize(val));
+      this.result.curves[this.currentCurve].size = size.value.values.map((val: string) =>
+        INI.isNumber(val) ? Number(val) : INI.sanitize(val),
+      );
     }
   }
 
   private parseDialogs(line: string) {
     const dialogBase: any = [
       P.string('dialog'),
-      this.space, this.equal, this.space,
+      this.space,
+      this.equal,
+      this.space,
       ['name', this.name],
       ...this.delimiter,
       ['title', this.inQuotes],
     ];
-    const dialogResult = P
-      .seqObj<any>(
-        ...dialogBase,
-        ...this.delimiter,
-        ['layout', this.name],
-        P.all,
-      )
+    const dialogResult = P.seqObj<any>(
+      ...dialogBase,
+      ...this.delimiter,
+      ['layout', this.name],
+      P.all,
+    )
       .or(P.seqObj<any>(...dialogBase, P.all))
       .parse(line);
 
@@ -593,43 +571,27 @@ export class INI implements ParserInterface {
     // panel = knock_window_angle_curve
     const panelBase: any = [
       P.string('panel'),
-      this.space, this.equal, this.space,
+      this.space,
+      this.equal,
+      this.space,
       ['name', this.name],
     ];
 
     // panel = knock_window_angle_curve, West
-    const panelWithLayout = [
-      ...panelBase,
-      ...this.delimiter,
-      ['layout', this.name],
-    ];
+    const panelWithLayout = [...panelBase, ...this.delimiter, ['layout', this.name]];
 
     // panel = flex_fuel_curve, { flexEnabled }
-    const panelWithCondition = [
-      ...panelBase,
+    const panelWithCondition = [...panelBase, ...this.delimiter, ['condition', this.expression]];
+
+    const panelResult = P.seqObj<any>(
+      ...panelWithLayout,
       ...this.delimiter,
       ['condition', this.expression],
-    ];
-
-    const panelResult = P
-      .seqObj<any>(
-        ...panelWithLayout,
-        ...this.delimiter,
-        ['condition', this.expression],
-        P.all,
-      )
-      .or(P.seqObj<any>(
-        ...panelWithCondition,
-        P.all,
-      ))
-      .or(P.seqObj<any>(
-        ...panelWithLayout,
-        P.all,
-      ))
-      .or(P.seqObj<any>(
-        ...panelBase,
-        P.all,
-      ))
+      P.all,
+    )
+      .or(P.seqObj<any>(...panelWithCondition, P.all))
+      .or(P.seqObj<any>(...panelWithLayout, P.all))
+      .or(P.seqObj<any>(...panelBase, P.all))
       .parse(line);
 
     if (panelResult.status) {
@@ -651,16 +613,14 @@ export class INI implements ParserInterface {
     // field = "Injector Layout"
     const fieldBase: any = [
       P.string('field'),
-      this.space, this.equal, this.space,
+      this.space,
+      this.equal,
+      this.space,
       ['title', this.notQuote.wrap(...this.quotes)],
     ];
 
     // field = "Injector Layout", injLayout
-    const fieldWithName = [
-      ...fieldBase,
-      ...this.delimiter,
-      ['name', this.name],
-    ];
+    const fieldWithName = [...fieldBase, ...this.delimiter, ['name', this.name]];
 
     // field = "Low (E0) ", flexFreqLow, { flexEnabled }
     const fieldWithCondition = [
@@ -679,23 +639,10 @@ export class INI implements ParserInterface {
       ['condition', this.expression],
     ];
 
-    const fieldResult = P
-      .seqObj<any>(
-        ...fieldWithDoubleCondition,
-        P.all,
-      )
-      .or(P.seqObj<any>(
-        ...fieldWithCondition,
-        P.all,
-      ))
-      .or(P.seqObj<any>(
-        ...fieldWithName,
-        P.all,
-      ))
-      .or(P.seqObj<any>(
-        ...fieldBase,
-        P.all,
-      ))
+    const fieldResult = P.seqObj<any>(...fieldWithDoubleCondition, P.all)
+      .or(P.seqObj<any>(...fieldWithCondition, P.all))
+      .or(P.seqObj<any>(...fieldWithName, P.all))
+      .or(P.seqObj<any>(...fieldBase, P.all))
       .parse(line);
 
     if (fieldResult.status) {
@@ -713,23 +660,21 @@ export class INI implements ParserInterface {
     }
 
     // topicHelp = "https://wiki.speeduino.com/en/configuration/Engine_Constants"
-    const helpResult = P
-      .seqObj<any>(
-        P.string('topicHelp'),
-        this.space, this.equal, this.space,
-        ['help', this.notQuote.wrap(...this.quotes)],
-        P.all,
-      )
-      .parse(line);
+    const helpResult = P.seqObj<any>(
+      P.string('topicHelp'),
+      this.space,
+      this.equal,
+      this.space,
+      ['help', this.notQuote.wrap(...this.quotes)],
+      P.all,
+    ).parse(line);
 
     if (!this.currentDialog) {
       throw new Error('Dialog not set');
     }
 
     if (helpResult.status) {
-      this.result.dialogs[this.currentDialog!].help = INI.sanitize(
-        helpResult.value.help,
-      );
+      this.result.dialogs[this.currentDialog!].help = INI.sanitize(helpResult.value.help);
     }
 
     // TODO: missing fields:
@@ -751,29 +696,15 @@ export class INI implements ParserInterface {
   }
 
   private parseKeyValue(line: string) {
-    const base: any = [
-      ['key', this.name],
-      this.space, this.equal, this.space,
-    ];
+    const base: any = [['key', this.name], this.space, this.equal, this.space];
 
-    const result = P
-      .seqObj<any>(
-        ...base,
-        ['value', this.notQuote.wrap(...this.quotes)],
-        P.all,
-      )
-      .or(P.seqObj<any>(
-        ...base,
-        ['value', this.numbers],
-        P.all,
-      ))
+    const result = P.seqObj<any>(...base, ['value', this.notQuote.wrap(...this.quotes)], P.all)
+      .or(P.seqObj<any>(...base, ['value', this.numbers], P.all))
       .tryParse(line);
 
     return {
       key: result.key as string,
-      value: INI.isNumber(result.value)
-        ? Number(result.value)
-        : INI.sanitize(result.value),
+      value: INI.isNumber(result.value) ? Number(result.value) : INI.sanitize(result.value),
     };
   }
 
@@ -783,21 +714,18 @@ export class INI implements ParserInterface {
       return;
     }
 
-    const menuResult = P
-      .seqObj<any>(
-        P.string('menu'),
-        this.space, this.equal, this.space,
-        ['name', this.inQuotes],
-        P.all,
-      ).parse(line);
+    const menuResult = P.seqObj<any>(
+      P.string('menu'),
+      this.space,
+      this.equal,
+      this.space,
+      ['name', this.inQuotes],
+      P.all,
+    ).parse(line);
 
     if (menuResult.status) {
-      const title = INI
-        .sanitize(menuResult.value.name)
-        .replace(/&/g, '');
-      const name = title
-        .toLowerCase()
-        .replace(/([^\w]\w)/g, (g) => g[1].toUpperCase()); // camelCase
+      const title = INI.sanitize(menuResult.value.name).replace(/&/g, '');
+      const name = title.toLowerCase().replace(/([^\w]\w)/g, (g) => g[1].toUpperCase()); // camelCase
 
       this.currentMenu = name;
       this.result.menus[this.currentMenu] = {
@@ -811,21 +739,18 @@ export class INI implements ParserInterface {
     if (this.currentMenu) {
       // parse groupMenu
       // groupMenu = "Engine Protection"
-      const groupMenuResult = P
-        .seqObj<any>(
-          P.string('groupMenu'),
-          this.space, this.equal, this.space,
-          ['title', this.notQuote.wrap(...this.quotes)],
-          P.all,
-        )
-        .parse(line);
+      const groupMenuResult = P.seqObj<any>(
+        P.string('groupMenu'),
+        this.space,
+        this.equal,
+        this.space,
+        ['title', this.notQuote.wrap(...this.quotes)],
+        P.all,
+      ).parse(line);
 
       if (groupMenuResult.status) {
-        const title = INI
-          .sanitize(groupMenuResult.value.title);
-        const name = title
-          .toLowerCase()
-          .replace(/([^\w]\w)/g, (g) => g[1].toUpperCase()); // camelCase
+        const title = INI.sanitize(groupMenuResult.value.title);
+        const name = title.toLowerCase().replace(/([^\w]\w)/g, (g) => g[1].toUpperCase()); // camelCase
 
         this.currentGroupMenu = name;
         this.result.menus[this.currentMenu].subMenus[name] = {
@@ -842,7 +767,9 @@ export class INI implements ParserInterface {
         // groupChildMenu = std_separator
         const base: any = [
           P.string('groupChildMenu'),
-          this.space, this.equal, this.space,
+          this.space,
+          this.equal,
+          this.space,
           ['name', this.name],
         ];
 
@@ -854,21 +781,20 @@ export class INI implements ParserInterface {
         ];
 
         // groupChildMenu = revLimiterDialog, "Rev Limiters", { engineProtectType }
-        const full: any = [
-          ...withTitle,
-          ...this.delimiter,
-          ['condition', this.expression],
-          P.all,
-        ];
+        const full: any = [...withTitle, ...this.delimiter, ['condition', this.expression], P.all];
 
         const groupChildMenuResult = P.seqObj<any>(...full, P.all)
           .or(P.seqObj<any>(...withTitle, P.all))
           .or(P.seqObj<any>(...base, P.all))
           .tryParse(line);
 
-        (this.result.menus[this.currentMenu].subMenus[this.currentGroupMenu] as GroupMenu).groupChildMenus[groupChildMenuResult.name] = {
+        (
+          this.result.menus[this.currentMenu].subMenus[this.currentGroupMenu] as GroupMenu
+        ).groupChildMenus[groupChildMenuResult.name] = {
           title: INI.sanitize(groupChildMenuResult.title),
-          condition: groupChildMenuResult.condition ? INI.sanitize(groupChildMenuResult.condition) : '',
+          condition: groupChildMenuResult.condition
+            ? INI.sanitize(groupChildMenuResult.condition)
+            : '',
         };
 
         return;
@@ -877,7 +803,9 @@ export class INI implements ParserInterface {
       // subMenu = std_separator
       const base: any = [
         P.string('subMenu'),
-        this.space, this.equal, this.space,
+        this.space,
+        this.equal,
+        this.space,
         ['name', this.name],
       ];
 
@@ -889,11 +817,7 @@ export class INI implements ParserInterface {
       ];
 
       // subMenu = egoControl, "AFR/O2", 3
-      const withPage: any = [
-        ...withTitle,
-        ...this.delimiter,
-        ['page', P.digits],
-      ];
+      const withPage: any = [...withTitle, ...this.delimiter, ['page', P.digits]];
 
       // subMenu = fuelTemp_curve, "Fuel Temp Correction", { flexEnabled }
       const withCondition: any = [
@@ -904,11 +828,7 @@ export class INI implements ParserInterface {
       ];
 
       // subMenu = inj_trimad_B, "Sequential fuel trim (5-8)", 9, { nFuelChannels >= 5 }
-      const full: any = [
-        ...withPage,
-        ...this.delimiter,
-        ['condition', this.expression],
-      ];
+      const full: any = [...withPage, ...this.delimiter, ['condition', this.expression]];
 
       const subMenuResult = P.seqObj<any>(...full, P.all)
         .or(P.seqObj<any>(...withCondition, P.all))
@@ -931,18 +851,18 @@ export class INI implements ParserInterface {
       P.string('#define'),
       this.space,
       ['name', this.name],
-      this.space, this.equal, this.space,
+      this.space,
+      this.equal,
+      this.space,
       ['values', this.values],
       P.all,
     ).tryParse(line);
 
     this.result.defines[result.name] = result.values.map(INI.sanitize);
 
-    const resolved = this.result.defines[result.name].map((val) => (
-      val.startsWith('$')
-        ? this.result.defines[val.slice(1)]
-        : val
-    )).flat();
+    const resolved = this.result.defines[result.name]
+      .map((val) => (val.startsWith('$') ? this.result.defines[val.slice(1)] : val))
+      .flat();
 
     this.result.defines[result.name] = resolved;
   }
@@ -957,7 +877,7 @@ export class INI implements ParserInterface {
 
     let constant = {} as Constant;
     switch (result.type) {
-      case 'scalar':
+      case 'scalar': {
         constant = {
           type: result.type,
           size: result.size,
@@ -969,7 +889,8 @@ export class INI implements ParserInterface {
           digits: Number(result.digits),
         };
         break;
-      case 'array':
+      }
+      case 'array': {
         constant = {
           type: result.type,
           size: result.size,
@@ -982,7 +903,8 @@ export class INI implements ParserInterface {
           digits: Number(result.digits),
         };
         break;
-      case 'bits':
+      }
+      case 'bits': {
         constant = {
           type: result.type,
           size: result.size,
@@ -990,13 +912,15 @@ export class INI implements ParserInterface {
           values: this.resolveBitsValues(result.name, result.values || []),
         };
         break;
-      case 'string':
+      }
+      case 'string': {
         constant = {
           type: result.type,
           size: result.size,
           length: Number(result.length),
         };
         break;
+      }
       default:
         break;
     }
@@ -1010,13 +934,14 @@ export class INI implements ParserInterface {
       return;
     }
 
-    const page = P
-      .seqObj<any>(
-        P.string('page'),
-        this.space, this.equal, this.space,
-        ['page', P.digits],
-        P.all,
-      ).parse(line);
+    const page = P.seqObj<any>(
+      P.string('page'),
+      this.space,
+      this.equal,
+      this.space,
+      ['page', P.digits],
+      P.all,
+    ).parse(line);
 
     if (page.status) {
       this.currentPage = Number(page.value.page) - 1;
@@ -1036,7 +961,7 @@ export class INI implements ParserInterface {
 
       let constant = {} as Constant;
       switch (result.type) {
-        case 'scalar':
+        case 'scalar': {
           constant = {
             type: result.type,
             size: result.size,
@@ -1049,7 +974,8 @@ export class INI implements ParserInterface {
             digits: Number(result.digits),
           };
           break;
-        case 'array':
+        }
+        case 'array': {
           constant = {
             type: result.type,
             size: result.size,
@@ -1063,7 +989,8 @@ export class INI implements ParserInterface {
             digits: Number(result.digits),
           };
           break;
-        case 'bits':
+        }
+        case 'bits': {
           constant = {
             type: result.type,
             size: result.size,
@@ -1072,6 +999,7 @@ export class INI implements ParserInterface {
             values: this.resolveBitsValues(result.name, result.values || []),
           };
           break;
+        }
         default:
           break;
       }
@@ -1086,31 +1014,41 @@ export class INI implements ParserInterface {
   }
 
   private resolveBitsValues(name: string, values: string[]) {
-    return values.map((val: string) => {
-      const resolve = () => {
-        const defineName = INI.sanitize(val.slice(1)); // name without $
-        const resolved = this.result.defines[defineName];
-        if (!resolved) {
-          throw new Error(`Unable to resolve bits values for ${name}`);
-        }
+    return values
+      .map((val: string) => {
+        const resolve = () => {
+          const defineName = INI.sanitize(val.slice(1)); // name without $
+          const resolved = this.result.defines[defineName];
+          if (!resolved) {
+            throw new Error(`Unable to resolve bits values for ${name}`);
+          }
 
-        return resolved;
-      };
+          return resolved;
+        };
 
-      return val.startsWith('$') ? resolve() : INI.sanitize(val);
-    }).flat().filter((val) => val !== '');
+        return val.startsWith('$') ? resolve() : INI.sanitize(val);
+      })
+      .flat()
+      .filter((val) => val !== '');
   }
 
   private parseConstAndVar(line: string, asPcVariable = false) {
     const address: any = [
-      ['address', P.regexp(/\d+:\d+/).trim(this.space).wrap(...this.sqrBrackets)],
+      [
+        'address',
+        P.regexp(/\d+:\d+/)
+          .trim(this.space)
+          .wrap(...this.sqrBrackets),
+      ],
     ];
 
     // first common (eg. name = scalar, U08, 3,)
     const base: any = (type: string) => {
       let list = [
         ['name', this.name],
-        this.space, this.equal, this.space,
+        this.space,
+        this.equal,
+        this.space,
         ['type', P.string(type)],
         ...this.delimiter,
         ['size', this.size],
@@ -1118,13 +1056,7 @@ export class INI implements ParserInterface {
 
       // pcVariables don't have "offset"
       if (!asPcVariable) {
-        list = [
-          ...list,
-          ...[
-            ...this.delimiter,
-            ['offset', P.digits],
-          ],
-        ];
+        list = [...list, ...[...this.delimiter, ['offset', P.digits]]];
       }
 
       return list;
@@ -1150,11 +1082,7 @@ export class INI implements ParserInterface {
     ];
 
     // normal scalar
-    const scalar = P.seqObj<any>(
-      ...base('scalar'),
-      ...this.delimiter,
-      ...scalarRest,
-    );
+    const scalar = P.seqObj<any>(...base('scalar'), ...this.delimiter, ...scalarRest);
 
     // short version of scalar (e.g. 'divider')
     const scalarShort = P.seqObj<any>(
@@ -1168,7 +1096,12 @@ export class INI implements ParserInterface {
     const array = P.seqObj<any>(
       ...base('array'),
       ...this.delimiter,
-      ['shape', P.regexp(/\d+\s*(x\s*\d+)*/).trim(this.space).wrap(...this.sqrBrackets)],
+      [
+        'shape',
+        P.regexp(/\d+\s*(x\s*\d+)*/)
+          .trim(this.space)
+          .wrap(...this.sqrBrackets),
+      ],
       ...this.delimiter,
       ...scalarRest,
     );
@@ -1184,26 +1117,18 @@ export class INI implements ParserInterface {
     );
 
     // short version of bits
-    const bitsShort = P.seqObj<any>(
-      ...base('bits'),
-      ...this.delimiter,
-      ...address,
-      P.all,
-    );
+    const bitsShort = P.seqObj<any>(...base('bits'), ...this.delimiter, ...address, P.all);
 
     // string (in pcVariables)
-    const string = P.seqObj<any>(
-      ...base('string'),
-      ...this.delimiter,
-      ['length', P.digits],
-      P.all,
-    );
+    const string = P.seqObj<any>(...base('string'), ...this.delimiter, ['length', P.digits], P.all);
 
     // predefined constant continuousChannelValue (in pcVariables)
     // TODO: investigate this
     const continuousChannelValue = P.seqObj<any>(
       ['name', this.name],
-      this.space, this.equal, this.space,
+      this.space,
+      this.equal,
+      this.space,
       ['reference', this.name],
       ...this.delimiter,
       ['channel', this.name],
@@ -1224,10 +1149,7 @@ export class INI implements ParserInterface {
     INI.isNumber(val || '0') ? Number(val || 0) : INI.sanitize(`${val}`);
 
   private static sanitize = (val: any) =>
-    val === undefined ? '' : `${val}`
-      .replace(/"/g, '')
-      .replace(/\s+/g, ' ')
-      .trim();
+    val === undefined ? '' : `${val}`.replace(/"/g, '').replace(/\s+/g, ' ').trim();
 
   private static isNumber = (val: any) => !Number.isNaN(Number(val));
 
@@ -1239,4 +1161,3 @@ export class INI implements ParserInterface {
     };
   };
 }
-
