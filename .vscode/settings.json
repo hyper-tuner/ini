@@ -1,7 +1,17 @@
 {
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "cSpell.words": [
-        "hypertuner",
-        "rusefi"
-    ]
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "cSpell.words": [
+    "hypertuner",
+    "rusefi"
+  ],
+  "editor.formatOnSave": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "rome.rome"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "rome.rome"
+  }
 }

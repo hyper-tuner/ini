@@ -48,7 +48,7 @@ if (!command) {
 }
 
 switch (command) {
-  case Commands.VALIDATE:
+  case Commands.VALIDATE: {
     if (!filename) {
       console.info('❗️ Please provide a file name');
       showUsage();
@@ -57,13 +57,17 @@ switch (command) {
     showVersion();
     validate(filename);
     break;
+  }
 
-  case Commands.VERSION:
+  case Commands.VERSION: {
     showVersion();
     break;
+  }
 
   default:
-    console.info(`❗️ Unknown command: ${command}, please use one of: [${Object.values(Commands).join(', ')}]`);
+    console.info(
+      `❗️ Unknown command: ${command}, please use one of: [${Object.values(Commands).join(', ')}]`,
+    );
     process.exit(1);
     break;
 }
