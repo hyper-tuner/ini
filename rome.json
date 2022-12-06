@@ -21,6 +21,9 @@
       "recommended": true,
       "style": {
         "noImplicitBoolean": "off"
+      },
+      "suspicious": {
+        "noExplicitAny": "off"
       }
     }
   }

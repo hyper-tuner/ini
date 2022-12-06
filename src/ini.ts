@@ -860,9 +860,9 @@ export class INI implements ParserInterface {
 
     this.result.defines[result.name] = result.values.map(INI.sanitize);
 
-    const resolved = this.result.defines[result.name]
-      .map((val) => (val.startsWith('$') ? this.result.defines[val.slice(1)] : val))
-      .flat();
+    const resolved = this.result.defines[result.name].flatMap((val) =>
+      val.startsWith('$') ? this.result.defines[val.slice(1)] : val,
+    );
 
     this.result.defines[result.name] = resolved;
   }
@@ -1015,7 +1015,7 @@ export class INI implements ParserInterface {
 
   private resolveBitsValues(name: string, values: string[]) {
     return values
-      .map((val: string) => {
+      .flatMap((val: string) => {
         const resolve = () => {
           const defineName = INI.sanitize(val.slice(1)); // name without $
           const resolved = this.result.defines[defineName];
@@ -1028,7 +1028,6 @@ export class INI implements ParserInterface {
 
         return val.startsWith('$') ? resolve() : INI.sanitize(val);
       })
-      .flat()
       .filter((val) => val !== '');
   }
 
