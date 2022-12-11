@@ -639,7 +639,19 @@ export class INI implements ParserInterface {
       ['condition', this.expression],
     ];
 
-    const fieldResult = P.seqObj<any>(...fieldWithDoubleCondition, P.all)
+    // field = "!Warning: The board you have selected may not have enough channels for sequential fuel!", {}, {}, { injLayout == 3 && !sequentialFuelAvailable }
+    const fieldWithTripleCondition = [
+      ...fieldBase,
+      ...this.delimiter,
+      P.regexp(/{.*?}/),
+      ...this.delimiter,
+      P.regexp(/{.*?}/),
+      ...this.delimiter,
+      ['condition', this.expression],
+    ];
+
+    const fieldResult = P.seqObj<any>(...fieldWithTripleCondition, P.all)
+      .or(P.seqObj<any>(...fieldWithDoubleCondition, P.all))
       .or(P.seqObj<any>(...fieldWithCondition, P.all))
       .or(P.seqObj<any>(...fieldWithName, P.all))
       .or(P.seqObj<any>(...fieldBase, P.all))
