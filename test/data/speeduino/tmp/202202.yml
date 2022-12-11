@@ -62754,6 +62754,7 @@ dialogs:
         title: >-
           !Warning: The board you have selected may not have enough channels for
           sequential fuel!
+        condition: '{ injLayout == 3 && !sequentialFuelAvailable }'
   engine_constants:
     title: ''
     layout: border
@@ -63761,6 +63762,7 @@ dialogs:
         title: >-
           !Warning: The board you have selected may not have enough channels for
           sequential ignition!
+        condition: '{ sparkMode == 3 && !sequentialIgnitionAvailable }'
       - name: ignAlgorithm
         title: Ignition load source
       - name: sparkMode
@@ -63920,6 +63922,7 @@ dialogs:
         title: Rev Limiter
       - name: _fieldText_
         title: '!Soft limiter only available with ignition cut'
+        condition: '{ engineProtectType == 2 }'
       - name: SoftRevLim
         title: Soft rev limit
         condition: '{ engineProtectType == 1 || engineProtectType == 3 }'
