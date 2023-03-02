@@ -1,7 +1,9 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "cSpell.words": [
+    "FOME",
     "hypertuner",
+    "parsimmon",
     "rusefi"
   ],
   "editor.formatOnSave": true,
