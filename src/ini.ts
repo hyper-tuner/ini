@@ -681,12 +681,10 @@ export class INI implements ParserInterface {
       P.all,
     ).parse(line);
 
-    if (!this.currentDialog) {
-      throw new Error('Dialog not set');
-    }
-
-    if (helpResult.status) {
-      this.result.dialogs[this.currentDialog!].help = INI.sanitize(helpResult.value.help);
+    if (this.currentDialog) {
+      if (helpResult.status) {
+        this.result.dialogs[this.currentDialog!].help = INI.sanitize(helpResult.value.help);
+      }
     }
 
     // TODO: missing fields:
