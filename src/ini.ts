@@ -483,9 +483,9 @@ export class INI implements ParserInterface {
       if (!this.currentCurve) {
         throw new Error('Curve not set');
       }
-      this.result.curves[this.currentCurve].xAxis = xAxisResult.value.values.map((val: string) =>
-        INI.isNumber(val) ? Number(val) : INI.sanitize(val),
-      );
+      this.result.curves[this.currentCurve].xAxis = xAxisResult.value.values.map((val: string) => {
+        return INI.isNumber(val) ? Number(val) : INI.sanitize(val);
+      });
 
       return;
     }
@@ -495,9 +495,9 @@ export class INI implements ParserInterface {
       if (!this.currentCurve) {
         throw new Error('Curve not set');
       }
-      this.result.curves[this.currentCurve].yAxis = yAxisResult.value.values.map((val: string) =>
-        INI.isNumber(val) ? Number(val) : INI.sanitize(val),
-      );
+      this.result.curves[this.currentCurve].yAxis = yAxisResult.value.values.map((val: string) => {
+        return INI.isNumber(val) ? Number(val) : INI.sanitize(val);
+      });
 
       return;
     }
@@ -507,9 +507,9 @@ export class INI implements ParserInterface {
       if (!this.currentCurve) {
         throw new Error('Curve not set');
       }
-      this.result.curves[this.currentCurve].xBins = xBinsResult.value.values.map((val: string) =>
-        INI.isNumber(val) ? Number(val) : INI.sanitize(val),
-      );
+      this.result.curves[this.currentCurve].xBins = xBinsResult.value.values.map((val: string) => {
+        return INI.isNumber(val) ? Number(val) : INI.sanitize(val);
+      });
 
       return;
     }
@@ -519,9 +519,9 @@ export class INI implements ParserInterface {
       if (!this.currentCurve) {
         throw new Error('Curve not set');
       }
-      this.result.curves[this.currentCurve].yBins = yBinsResult.value.values.map((val: string) =>
-        INI.isNumber(val) ? Number(val) : INI.sanitize(val),
-      );
+      this.result.curves[this.currentCurve].yBins = yBinsResult.value.values.map((val: string) => {
+        return INI.isNumber(val) ? Number(val) : INI.sanitize(val);
+      });
 
       return;
     }
@@ -531,9 +531,9 @@ export class INI implements ParserInterface {
       if (!this.currentCurve) {
         throw new Error('Curve not set');
       }
-      this.result.curves[this.currentCurve].size = size.value.values.map((val: string) =>
-        INI.isNumber(val) ? Number(val) : INI.sanitize(val),
-      );
+      this.result.curves[this.currentCurve].size = size.value.values.map((val: string) => {
+        return INI.isNumber(val) ? Number(val) : INI.sanitize(val);
+      });
     }
   }
 
@@ -870,9 +870,9 @@ export class INI implements ParserInterface {
 
     this.result.defines[result.name] = result.values.map(INI.sanitize);
 
-    const resolved = this.result.defines[result.name].flatMap((val) =>
-      val.startsWith('$') ? this.result.defines[val.slice(1)] : val,
-    );
+    const resolved = this.result.defines[result.name].flatMap((val) => {
+      return val.startsWith('$') ? this.result.defines[val.slice(1)] : val;
+    });
 
     this.result.defines[result.name] = resolved;
   }
@@ -1154,11 +1154,13 @@ export class INI implements ParserInterface {
       .tryParse(line);
   }
 
-  private static numberOrExpression = (val: string | undefined | null) =>
-    INI.isNumber(val || '0') ? Number(val || 0) : INI.sanitize(`${val}`);
+  private static numberOrExpression = (val: string | undefined | null) => {
+    return INI.isNumber(val || '0') ? Number(val || 0) : INI.sanitize(`${val}`);
+  };
 
-  private static sanitize = (val: any) =>
-    val === undefined ? '' : `${val}`.replace(/"/g, '').replace(/\s+/g, ' ').trim();
+  private static sanitize = (val: any) => {
+    return val === undefined ? '' : `${val}`.replace(/"/g, '').replace(/\s+/g, ' ').trim();
+  };
 
   private static isNumber = (val: any) => !Number.isNaN(Number(val));
 

@@ -21,19 +21,20 @@
     "start": "tsc --watch",
     "generate": "npm run build && node test/test.js generate",
     "test": "npm run build && node test/test.js",
-    "lint": "tsc && rome ci src",
+    "lint": "tsc && npm run lint:rome",
+    "lint:rome": "rome ci src",
     "lint:fix": "rome format --write src && rome check --apply src",
-    "lint:fix:suggested": "rome check --apply-suggested src"
+    "lint:fix:unsafe": "rome check --apply-unsafe src"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.5",
-    "@types/node": "^18.14.4",
+    "@types/node": "^20.6.0",
     "@types/parsimmon": "^1.10.6",
-    "rome": "^11.0.0",
-    "typescript": "^4.9.5"
+    "rome": "^12.1.3",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@hyper-tuner/types": "^0.4.2",
+    "@hyper-tuner/types": "git+https://github.com/hyper-tuner/types.git",
     "js-yaml": "^4.1.0",
     "parsimmon": "^1.18.1"
   }

@@ -64,10 +64,11 @@ switch (command) {
     break;
   }
 
-  default:
+  default: {
     console.info(
       `❗️ Unknown command: ${command}, please use one of: [${Object.values(Commands).join(', ')}]`,
     );
     process.exit(1);
     break;
+  }
 }
